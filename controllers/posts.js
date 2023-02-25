@@ -1,10 +1,15 @@
 const cloudinary = require("../middleware/cloudinary");
 const Post = require("../models/Post");
+const { getApiToken } = require("../services/spotify");
 
 module.exports = {
   getProfile: async (req, res) => { 
     console.log(req.user)
     try {
+      // Call getApiToken() to get the Spotify API access token
+      const myToken = await getApiToken();
+      console.log(myToken);
+      
       //Since we have a session each request (req) contains the logged-in users info: req.user
       //console.log(req.user) to see everything
       //Grabbing just the posts of the logged-in user
