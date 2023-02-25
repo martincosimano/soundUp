@@ -6,6 +6,7 @@ module.exports = {
   getProfile: async (req, res) => { 
     console.log(req.user)
     try {
+      
       // Call getApiToken() to get the Spotify API access token
       const myToken = await getApiToken();
       console.log(myToken);
