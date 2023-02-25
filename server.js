@@ -58,42 +58,6 @@ app.use(flash());
 app.use("/", mainRoutes);
 app.use("/post", postRoutes);
 
-
-//Using Spotify Api
-const CLIENT_ID = process.env.CLIENT_ID;
-const CLIENT_SECRET = process.env.CLIENT_SECRET;
-let myToken;
-
-function getApiToken() {
-  return new Promise((resolve, reject) => {
-    var authParameters = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      },
-      body: 'grant_type=client_credentials&client_id=' + CLIENT_ID + '&client_secret=' + CLIENT_SECRET
-    }
-
-    fetch('https://accounts.spotify.com/api/token', authParameters)
-      .then(result => result.json())
-      .then(data => resolve(data.access_token))
-      .catch(error => reject(error));
-  });
-}
-
-function App() {
-  let myToken;
-  
-  getApiToken()
-    .then(data => {
-      myToken = data;
-      console.log(myToken);
-    })
-    .catch(error => console.error(error));
-}
-
-App();
-
 //Server Running
 app.listen(process.env.PORT, () => {
   console.log("Server is running, you better catch it!");
