@@ -14,4 +14,14 @@ router.get('/', async (req, res, next) => {
   }
 });
 
+router.post('/song', async (req, res, next) => {
+  try {
+    const { title, artist } = req.body;
+    // Use title and artist to search for song on Spotify API
+    // Send back the result to the UI
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
