@@ -1,5 +1,6 @@
 //Using Spotify Api
 // Returns the access token required for accessing the Spotify API
+require('dotenv').config({ path: './config/.env' });
 const request = require("request");
 
 const client_id = process.env.CLIENT_ID;
@@ -15,6 +16,7 @@ function getApiToken() {
     },
     form: {
       grant_type: "client_credentials",
+      scope: "user-read-private user-read-email playlist-read-private playlist-read-collaborative user-library-read user-follow-read user-top-read",
     },
     json: true,
   };

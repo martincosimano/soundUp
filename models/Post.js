@@ -13,6 +13,14 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  artistId: {
+    type: String,
+    required: true,
+  },
+  songId: {
+    type: String,
+    required: true,
+  },
   likes: {
     type: Number,
     required: true,

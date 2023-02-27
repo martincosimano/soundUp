@@ -1,4 +1,4 @@
-const cloudinary = require("../middleware/cloudinary");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const Post = require("../models/Post");
 const { getApiToken } = require('../services/spotify.js');
 
@@ -42,17 +42,41 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
+      // Call getApiToken() to get the token
+      const myToken = await getApiToken();
+      console.log(myToken);
+      
+      // Construct the search query using the artist name and song title from the request body
+      const query = `${req.body.artist} ${req.body.songTitle}`;
+      
+      // Use the Spotify API to search for the song
+      const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
+        headers: {
+          'Authorization': `Bearer ${myToken}`,
+        }
+      });
+      
+      // Parse the response as JSON
+      const data = await response.json();
+      
+      // Get the first result from the search
+      const song = data.tracks.items[0];
+      
+      // Create a new post with the song information
       await Post.create({
         title: req.body.songTitle,
         caption: req.body.caption,
         likes: 0,
         user: req.user.id,
+        image: song.album.images[0].url,
+        artist: song.artists[0].name,
+        songUri: song.uri,
       });
+      
       console.log("Post has been added!");
       res.redirect("/profile");
     } catch (err) {
       console.log(err);
-      console.log('Song Title:', songTitle);
     }
   },
   likePost: async (req, res) => {
