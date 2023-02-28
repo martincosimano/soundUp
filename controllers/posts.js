@@ -2,19 +2,28 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const Post = require("../models/Post");
 const { getApiToken } = require('../services/spotify.js');
 
+// Function to search for tracks and artists using the Spotify API
+const searchSpotify = async (query, type) => {
+  // Get access token from Spotify API
+  const token = await getApiToken();
+  const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=1`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+  });
+  const data = await response.json();
+  return data;
+};
+
 module.exports = {
   getProfile: async (req, res) => { 
     console.log(req.user)
     try {
-      // Call getApiToken() to get the token
       const myToken = await getApiToken();
       console.log(myToken);
-
-      //Since we have a session each request (req) contains the logged-in users info: req.user
-      //console.log(req.user) to see everything
-      //Grabbing just the posts of the logged-in user
       const posts = await Post.find({ user: req.user.id });
-      //Sending post data from mongodb and user data to ejs template
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
@@ -30,10 +39,6 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      //id parameter comes from the post routes
-      //router.get("/:id", ensureAuth, postsController.getPost);
-      //http://localhost:2121/post/631a7f59a3e56acfc7da286f
-      //id === 631a7f59a3e56acfc7da286f
       const post = await Post.findById(req.params.id);
       res.render("post.ejs", { post: post, user: req.user});
     } catch (err) {
@@ -41,42 +46,25 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
+    const { songTitle, artistName, caption } = req.body;
     try {
-      // Call getApiToken() to get the token
-      const myToken = await getApiToken();
-      console.log(myToken);
-      
-      // Construct the search query using the artist name and song title from the request body
-      const query = `${req.body.artist} ${req.body.songTitle}`;
-      
-      // Use the Spotify API to search for the song
-      const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`, {
-        headers: {
-          'Authorization': `Bearer ${myToken}`,
-        }
-      });
-      
-      // Parse the response as JSON
-      const data = await response.json();
-      
-      // Get the first result from the search
-      const song = data.tracks.items[0];
-      
-      // Create a new post with the song information
-      await Post.create({
-        title: req.body.songTitle,
-        caption: req.body.caption,
-        likes: 0,
+      // Search for track and artist using Spotify API
+      const trackData = await searchSpotify(songTitle, "track");
+      const artistData = await searchSpotify(artistName, "artist");
+      // Create post with track and artist data
+      const post = await Post.create({
+        songTitle,
+        artistName,
+        trackData,
+        artistData,
+        caption,
         user: req.user.id,
-        image: song.album.images[0].url,
-        artist: song.artists[0].name,
-        songUri: song.uri,
       });
-      
       console.log("Post has been added!");
       res.redirect("/profile");
     } catch (err) {
-      console.log(err);
+      console.error(err);
+      res.render("error/500");
     }
   },
   likePost: async (req, res) => {
@@ -95,11 +83,8 @@ module.exports = {
   },
   deletePost: async (req, res) => {
     try {
-      // Find post by id
       let post = await Post.findById({ _id: req.params.id });
-      // Delete image from cloudinary
       await cloudinary.uploader.destroy(post.cloudinaryId);
-      // Delete post from db
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");

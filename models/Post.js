@@ -1,39 +1,39 @@
 const mongoose = require("mongoose");
 
-const PostSchema = new mongoose.Schema({
-  title: {
+const postSchema = new mongoose.Schema({
+  songTitle: {
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    require: true,
-  },
-  caption: {
+  artistName: {
     type: String,
     required: true,
   },
-  artistId: {
+  trackData: {
+    type: Object,
+    required: true,
+  },
+  artistData: {
+    type: Object,
+    required: true,
+  },
+  body: {
     type: String,
     required: true,
   },
-  songId: {
-    type: String,
-    required: true,
-  },
-  likes: {
-    type: Number,
-    required: true,
-  },
-  user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-  },
-  createdAt: {
+  date: {
     type: Date,
     default: Date.now,
   },
 });
 
+const Post = mongoose.model("Post", postSchema);
+
+async function createPost(postData) {
+  const post = new Post(postData);
+  await post.save();
+  return post;
+}
+
 //MongoDB Collection named here - will give lowercase plural of name 
-module.exports = mongoose.model("Post", PostSchema);
+module.exports = mongoose.model("Post", postSchema);
