@@ -1,5 +1,7 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const Post = require("../models/Post");
+const mongoose = require("mongoose");
+const ObjectId = mongoose.Types.ObjectId;
 const { getApiToken } = require('../services/spotify.js');
 
 // Function to search for tracks and artists using the Spotify API
@@ -17,6 +19,7 @@ const searchSpotify = async (query, type) => {
   return data;
 };
 
+// Post controller functions
 module.exports = {
   getProfile: async (req, res) => { 
     console.log(req.user)
@@ -46,25 +49,24 @@ module.exports = {
     }
   },
   createPost: async (req, res) => {
-    const { songTitle, artistName, caption } = req.body;
+    const { title, body, artistName } = req.body;
+    const artistData = await getArtistData(artistName);
+    const post = new Post({
+      title,
+      body,
+      artistName,
+      artistData,
+      trackData,
+      songTitle,
+      author: req.user._id,
+    });
     try {
-      // Search for track and artist using Spotify API
-      const trackData = await searchSpotify(songTitle, "track");
-      const artistData = await searchSpotify(artistName, "artist");
-      // Create post with track and artist data
-      const post = await Post.create({
-        songTitle,
-        artistName,
-        trackData,
-        artistData,
-        caption,
-        user: req.user.id,
-      });
-      console.log("Post has been added!");
-      res.redirect("/profile");
-    } catch (err) {
-      console.error(err);
-      res.render("error/500");
+      await post.save();
+      req.flash('success_msg', 'Post created successfully');
+      res.redirect('/posts');
+    } catch (error) {
+      console.log(error);
+      res.render('error/500');
     }
   },
   likePost: async (req, res) => {
