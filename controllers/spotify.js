@@ -18,6 +18,27 @@ const getArtist = async (query) => {
   }
 };
 
+const getArtistData = async (artistName) => {
+  const token = await getApiToken();
+  const response = await axios.get(`https://api.spotify.com/v1/search?q=${artistName}&type=artist&limit=1`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const artist = response.data.artists.items[0];
+
+  const artistData = {
+    name: artist.name,
+    image: artist.images[0].url,
+    genres: artist.genres,
+    spotifyLink: artist.external_urls.spotify,
+    followers: artist.followers.total,
+  };
+
+  return artistData;
+};
+
 const getAlbum = async (id) => {
   try {
     const token = await getApiToken();
@@ -60,4 +81,4 @@ const getSongs = async (query) => {
 
 
 
-module.exports = { getArtist, getAlbum, getSongs };
+module.exports = { getArtist, getArtistData, getAlbum, getSongs };

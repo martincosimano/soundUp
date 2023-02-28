@@ -4,6 +4,7 @@ const axios = require('axios');
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const { getApiToken } = require('../services/spotify.js');
+const { getArtistData } = require('./spotify');
 
 // Function to search for tracks and artists using the Spotify API
 const searchSpotify = async (query, type) => {
@@ -18,18 +19,6 @@ const searchSpotify = async (query, type) => {
   });
   const data = await response.json();
   return data;
-};
-
-const getArtistData = async (artistName) => {
-  const url = `https://api.genius.com/search?q=${artistName}`;
-  const config = {
-    headers: {
-      Authorization: `Bearer ${process.env.GENIUS_ACCESS_TOKEN}`,
-    },
-  };
-  const response = await axios.get(url, config);
-  const artistData = response.data.response.hits[0].result;
-  return artistData;
 };
 
 // Post controller functions
@@ -61,25 +50,26 @@ module.exports = {
       console.log(err);
     }
   },
-  createPost: async (req, res) => {
+  createPost : async (req, res) => {
     const { title, body, artistName } = req.body;
-    const artistData = await getArtistData(artistName);
-    const post = new Post({
-      title,
-      body,
-      artistName,
-      artistData,
-      trackData,
-      songTitle,
-      author: req.user._id,
-    });
+  
     try {
+      const artistData = await getArtistData(artistName);
+  
+      const post = new Post({
+        title,
+        body,
+        artistName,
+        artistData,
+        author: req.user._id,
+      });
+  
       await post.save();
-      req.flash('success_msg', 'Post created successfully');
-      res.redirect('/posts');
+  
+      res.redirect(`/posts/${post._id}`);
     } catch (error) {
-      console.log(error);
-      res.render('error/500');
+      console.error(error);
+      res.redirect('/posts/new');
     }
   },
   likePost: async (req, res) => {
