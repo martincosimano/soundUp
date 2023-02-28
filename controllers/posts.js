@@ -1,5 +1,6 @@
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const Post = require("../models/Post");
+const axios = require('axios');
 const mongoose = require("mongoose");
 const ObjectId = mongoose.Types.ObjectId;
 const { getApiToken } = require('../services/spotify.js');
@@ -17,6 +18,18 @@ const searchSpotify = async (query, type) => {
   });
   const data = await response.json();
   return data;
+};
+
+const getArtistData = async (artistName) => {
+  const url = `https://api.genius.com/search?q=${artistName}`;
+  const config = {
+    headers: {
+      Authorization: `Bearer ${process.env.GENIUS_ACCESS_TOKEN}`,
+    },
+  };
+  const response = await axios.get(url, config);
+  const artistData = response.data.response.hits[0].result;
+  return artistData;
 };
 
 // Post controller functions
