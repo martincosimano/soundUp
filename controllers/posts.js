@@ -1,33 +1,10 @@
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 const Post = require("../models/Post");
-const axios = require('axios');
-const mongoose = require("mongoose");
-const ObjectId = mongoose.Types.ObjectId;
-const { getApiToken } = require('../services/spotify.js');
-const { getArtistData } = require('./spotify');
-
-// Function to search for tracks and artists using the Spotify API
-const searchSpotify = async (query, type) => {
-  // Get access token from Spotify API
-  const token = await getApiToken();
-  const response = await fetch(`https://api.spotify.com/v1/search?q=${query}&type=${type}&limit=1`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-  });
-  const data = await response.json();
-  return data;
-};
 
 // Post controller functions
 module.exports = {
   getProfile: async (req, res) => { 
     console.log(req.user)
     try {
-      const myToken = await getApiToken();
-      console.log(myToken);
       const posts = await Post.find({ user: req.user.id });
       res.render("profile.ejs", { posts: posts, user: req.user });
     } catch (err) {
@@ -83,7 +60,6 @@ module.exports = {
   deletePost: async (req, res) => {
     try {
       let post = await Post.findById({ _id: req.params.id });
-      await cloudinary.uploader.destroy(post.cloudinaryId);
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
       res.redirect("/profile");
