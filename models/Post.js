@@ -5,7 +5,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  songTitle: {
+  songName: {
     type: String,
     required: true,
   },
@@ -13,35 +13,23 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  trackData: {
-    type: Object,
-    required: true,
-  },
-  artistData: {
-    type: Object,
-    required: true,
-  },
-  body: {
+    caption: {
     type: String,
     required: true,
   },
-  date: {
+  likes: {
+    type: Number,
+    required: true,
+  },
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+  createdAt: {
     type: Date,
     default: Date.now,
   },
-  author: {
-    type: String,
-    required: true,
-  },
 });
-
-const Post = mongoose.model("Post", postSchema);
-
-async function createPost(postData) {
-  const post = new Post(postData);
-  await post.save();
-  return post;
-}
 
 //MongoDB Collection named here - will give lowercase plural of name 
 module.exports = mongoose.model("Post", postSchema);

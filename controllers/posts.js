@@ -50,26 +50,20 @@ module.exports = {
       console.log(err);
     }
   },
-  createPost : async (req, res) => {
-    const { title, body, artistName } = req.body;
-  
+  createPost: async (req, res) => {
     try {
-      const artistData = await getArtistData(artistName);
-  
-      const post = new Post({
-        title,
-        body,
-        artistName,
-        artistData,
-        author: req.user._id,
+      Post.create({
+        title: req.body.title,
+        caption: req.body.caption,
+        likes: 0,
+        songName: req.body.songName,
+        artistName: req.body.artistName,
+        user: req.user.id,
       });
-  
-      await post.save();
-  
-      res.redirect(`/posts/${post._id}`);
-    } catch (error) {
-      console.error(error);
-      res.redirect('/posts/new');
+      console.log('Post has been added!');
+      res.redirect('/profile');
+    } catch (err) {
+      console.log(err);
     }
   },
   likePost: async (req, res) => {
