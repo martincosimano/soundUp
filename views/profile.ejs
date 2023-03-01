@@ -9,6 +9,12 @@
           </div>
           <div class="mt-5">
             <h2>Add a post</h2>
+
+            <!-- Conditionally render the error message if it exists -->
+            <% if (flash.error) { %>
+                <p class="text-danger"><%= flash.error %></p>
+            <% } %>
+
             <form action="/post/createPost" enctype="multipart/form-data" method="POST">
               <div class="mb-3">
                   <label for="title" class="form-label">Title</label>
