@@ -4,6 +4,8 @@
     <div class="col-6">
       <h2><%= post.title %></h2>
       <img class="img-fluid" src="<%= post.image%>" />
+      <h3>Song: <%= post.songName %></h3>
+      <h4>Artist: <%= post.artistName %></h4>
       <div class="row justify-content-between">
         <form
           class="col-1"
@@ -26,6 +28,9 @@
     </div>
     <div class="col-3 mt-5">
       <p><%= post.caption %></p>
+      <% if(post.spotifyTrackId){ %>
+      <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="300" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+      <% } %>
     </div>
 
     <div class="col-6 mt-5">
@@ -34,5 +39,4 @@
     </div>
   </div>
 </div>
-
 <%- include('partials/footer') -%>

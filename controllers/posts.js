@@ -1,4 +1,6 @@
 const Post = require("../models/Post");
+const { getApiToken, searchTrack } = require("../services/spotify");
+
 
 // Post controller functions
 module.exports = {
@@ -29,18 +31,35 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
-      Post.create({
+      const { songName, artistName } = req.body;
+  
+      // Check if the required fields are filled in
+      if (!songName || !artistName) {
+        throw new Error('Song name and artist name are required');
+      }
+  
+      const token = await getApiToken();
+      const trackData = await searchTrack(songName, artistName, token);
+
+      if (!trackData?.tracks?.items?.length) {
+        throw new Error('No track data found for this song and artist');
+      }
+      
+      const post = await Post.create({
         title: req.body.title,
         caption: req.body.caption,
         likes: 0,
-        songName: req.body.songName,
-        artistName: req.body.artistName,
-        user: req.user.id,
+        songName,
+        artistName,
+        spotifyTrackId: trackData.tracks.items[0].id,
+        user: req.user?.id, // Check if req.user exists before accessing its properties
       });
+  
       console.log('Post has been added!');
       res.redirect('/profile');
     } catch (err) {
       console.log(err);
+      res.status(400).send(err.message); // Send an error response to the client
     }
   },
   likePost: async (req, res) => {

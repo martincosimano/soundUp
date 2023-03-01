@@ -13,7 +13,11 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-    caption: {
+  spotifyTrackId: {
+    type: String,
+    required: true,
+  },
+  caption: {
     type: String,
     required: true,
   },
@@ -23,7 +27,7 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
+    ref: 'User',
   },
   createdAt: {
     type: Date,

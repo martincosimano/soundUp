@@ -1,22 +1,23 @@
+const Post = require("../models/Post");
 const axios = require('axios');
 const { getApiToken } = require('../services/spotify');
 
 
 module.exports = {
-  // getArtist: async (req, res) => {
-  //   try {
-  //     const token = await getApiToken();
-  //     const artistParameters = {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Authorization': 'Bearer ' + token
-  //       }
-  //     }
-  //   } catch (err) {
-  //     console.log(err);
-  //   }
-  // },
+  getArtist: async (req, res) => {
+    try {
+      const token = await getApiToken();
+      const artistParameters = {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + token
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  },
   // artistID: await fetch('https://api.spotify.com/v1/search?q=' + searchInput + '&type=artist', artistParameters)
   //   .then(response => response.json())
   //   .then(data => console.log(data))
@@ -26,6 +27,25 @@ module.exports = {
   //     res.console.log('Search for ' + req.body.songName);
   //   } catch (err) {
   //     console.log(err);
+  //   }
+  // }
+  // searchArtist: async (artistName) => {
+  //   try {
+  //     const token = await getApiToken();
+  //     const response = await axios.get('https://api.spotify.com/v1/search', {
+  //       headers: {
+  //         Authorization: 'Bearer ' + token,
+  //       },
+  //       params: {
+  //         q: artistName,
+  //         type: 'artist',
+  //       },
+  //     });
+  
+  //     return response.data.artists.items[0];
+  //   } catch (error) {
+  //     console.error(error);
+  //     return null;
   //   }
   // }
 }
