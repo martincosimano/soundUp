@@ -6,7 +6,7 @@ const { getApiToken, searchTrack } = require("../services/spotify");
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id });
+      const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();;
       res.render("profile.ejs", { posts: posts, user: req.user, flash: req.flash() });
     } catch (err) {
       console.log(err);
@@ -23,7 +23,18 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
-      res.render("post.ejs", { post: post, user: req.user});
+      const relatedPosts = await Post.find({
+        $or: [
+          { songName: post.songName },
+          { artistName: post.artistName },
+          { genre: post.genre },
+        ],
+      }).limit(3);
+      res.render("post.ejs", {
+        post: post,
+        user: req.user,
+        relatedPosts: relatedPosts,
+      });
     } catch (err) {
       console.log(err);
     }
