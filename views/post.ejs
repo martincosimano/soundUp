@@ -33,14 +33,19 @@
         <div class="card">
           <div class="card-body">
             <% for(var i=0; i<comments.length; i++) {%>
-              <div class="mb-3">
-                <%= comments[i].comment%>
-                <div class="d-flex justify-content-center align-items-center">
-                  <%if(post.user == user.id){ %>
-                    <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
-                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                    </form>                    
-                  <% } %>
+              <div class="mb-3 d-flex justify-content-center">
+                <div class="d-flex flex-column align-items-center">
+                  <div class="d-flex justify-content-center mb-2">
+                    <a href="/profile" class="username"> <%=comments[i].userName%>:</a>
+                    <p><%= comments[i].comment%></p>
+                  </div>
+                  <div class="d-flex justify-content-center">
+                    <%if(comments[i].user == user.id){ %>
+                      <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>                    
+                    <% } %>
+                  </div>
                 </div>
               </div>
               <hr>
@@ -53,7 +58,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Created by</h5>
-          <p class="card-text username"><%= post.createdByUser %></p>
+          <p class="card-text username"><%= post.userName %></p>
           <a href="/post/<%= post._id %>" class="btn btn-primary">Go to User Profile</a>
         </div>
       </div>

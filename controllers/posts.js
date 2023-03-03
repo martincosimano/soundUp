@@ -45,7 +45,7 @@ module.exports = {
           { songName: post.songName },
           { artistName: post.artistName },
         ],
-      }).limit(3);
+      }).sort({ createdAt: "desc"}).limit(3);
       res.render("post.ejs", {
         post: post,
         user: req.user,
@@ -94,8 +94,8 @@ module.exports = {
             artistName,
             spotifyTrackId: trackData.tracks.items[0].id,
             user: req.user?.id,
-            createdByUser: req.user?.userName,
-            createdByMail: req.user?.email,
+            userName: req.user?.userName,
+            email: req.user?.email,
         });
 
         console.log('Post has been added!');

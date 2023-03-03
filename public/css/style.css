@@ -73,7 +73,7 @@ li {
   .btn-primary:not(:disabled):not(.disabled):active:focus {
     box-shadow: none;
   }
-
+  
   @media (max-width: 576px) {
     h1 {
       font-size: 2.5rem;

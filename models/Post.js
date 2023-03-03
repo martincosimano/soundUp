@@ -27,19 +27,19 @@ const postSchema = new mongoose.Schema({
   },
   user: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
+    ref: "User",
   },
   createdAt: {
     type: Date,
     default: Date.now,
   },
-  createdByUser: {
+  userName: {
     type: String,
-    required: true,
+    ref: "User",
   },
-  createdByMail: {
+  email: {
     type: String,
-    required: true,
+    ref: "User",
   }
 });
 
