@@ -7,6 +7,7 @@ const { getApiToken, searchTrack } = require("../services/spotify");
 module.exports = {
   getProfile: async (req, res) => {
     try {
+      console.log(req.user.id)
       const limit = 3;
       const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" }).limit(limit).lean();
       res.render("profile.ejs", { posts: posts, user: req.user, flash: req.flash() });
