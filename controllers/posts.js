@@ -1,4 +1,5 @@
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const { getApiToken, searchTrack } = require("../services/spotify");
 
 
@@ -38,6 +39,7 @@ module.exports = {
   getPost: async (req, res) => {
     try {
       const post = await Post.findById(req.params.id);
+      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc"}).lean();
       const relatedPosts = await Post.find({
         $or: [
           { songName: post.songName },
@@ -48,6 +50,7 @@ module.exports = {
         post: post,
         user: req.user,
         relatedPosts: relatedPosts,
+        comments: comments,
       });
     } catch (err) {
       console.log(err);

@@ -3,6 +3,10 @@ a {
   color: #106de6;
 }
 
+li {
+  list-style: none;
+}
+
 .username {
   text-transform: capitalize;
 }

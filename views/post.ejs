@@ -13,12 +13,41 @@
         <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST">
           <button class="btn btn-outline-danger btn-sm fa fa-trash" type="submit"></button>
         </form>
-        <%}%>
+        <% } %>
       </div>
       <hr class="my-4">
       <% if(post.spotifyTrackId){ %>
       <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       <% } %>
+      <div class="mt-5">
+        <h2>Add a comment</h2>
+        <form action="/comment/createComment/<%=post._id%>" method="POST">
+          <div class="form-group">
+            <label for="comment" class="form-label">Comment</label>
+            <textarea class="form-control" id="comment" name="comment" rows="3"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <hr>
+        <h2>Comments</h2>
+        <div class="card">
+          <div class="card-body">
+            <% for(var i=0; i<comments.length; i++) {%>
+              <div class="mb-3">
+                <%= comments[i].comment%>
+                <div class="d-flex justify-content-center align-items-center">
+                  <%if(post.user == user.id){ %>
+                    <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
+                      <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>                    
+                  <% } %>
+                </div>
+              </div>
+              <hr>
+            <% } %>
+          </div>
+        </div>
+      </div>      
     </div>
     <div class="col-md-4 mt-5 mt-md-0">
       <div class="card">
