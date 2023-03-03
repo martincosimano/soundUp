@@ -1,16 +1,17 @@
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const { getApiToken, searchTrack } = require("../services/spotify");
+const User = require("../models/User");
 
 
 // Post controller functions
 module.exports = {
   getProfile: async (req, res) => {
     try {
-      console.log(req.user.id)
+      const user = await User.findById(req.params.id);
       const limit = 3;
-      const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" }).limit(limit).lean();
-      res.render("profile.ejs", { posts: posts, user: req.user, flash: req.flash() });
+      const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).limit(limit).lean();
+      res.render("profile.ejs", { posts: posts, user: user, flash: req.flash() });
     } catch (err) {
       console.log(err);
     }
@@ -100,7 +101,7 @@ module.exports = {
         });
 
         console.log('Post has been added!');
-        res.redirect('/profile');
+        res.redirect('/profile/:id');
     } catch (err) {
         console.log(err);
 
@@ -108,7 +109,7 @@ module.exports = {
         req.flash('error', err.message);
 
         // Redirect to the profile page
-        res.redirect('/profile');
+        res.redirect('/profile/:id');
     }
 },
   likePost: async (req, res) => {
@@ -130,9 +131,9 @@ module.exports = {
       let post = await Post.findById({ _id: req.params.id });
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect("/profile/:id");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/profile/:id");
     }
   }
 };
