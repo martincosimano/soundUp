@@ -96,7 +96,7 @@ module.exports = {
         });
 
         console.log('Post has been added!');
-        res.redirect('/profile/:id');
+        res.redirect('/profile');
     } catch (err) {
         console.log(err);
 
@@ -104,7 +104,7 @@ module.exports = {
         req.flash('error', err.message);
 
         // Redirect to the profile page
-        res.redirect('/profile/:id');
+        res.redirect('/profile');
     }
 },
   likePost: async (req, res) => {
@@ -126,9 +126,9 @@ module.exports = {
       let post = await Post.findById({ _id: req.params.id });
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile/:id");
+      res.redirect("/profile");
     } catch (err) {
-      res.redirect("/profile/:id");
+      res.redirect("/profile");
     }
   }
 };
