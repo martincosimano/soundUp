@@ -3,7 +3,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <h2 class="mb-4"><%= post.title %></h2>
-      <img class="img-fluid mb-3" src="<%= post.image%>" />
+      <p><%= post.caption %></p>
       <h3>Song: <%= post.songName %></h3>
       <h4>Artist: <%= post.artistName %></h4>
       <div class="d-flex justify-content-between align-items-center">
@@ -18,7 +18,6 @@
         <%}%>
       </div>
       <hr class="my-4">
-      <p><%= post.caption %></p>
       <% if(post.spotifyTrackId){ %>
       <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
       <% } %>
@@ -27,7 +26,7 @@
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">Profile Information</h5>
-          <p class="card-text">Name: <%= user.name %></p>
+          <p class="card-text username">Name: <%= user.userName %></p>
           <p class="card-text">Email: <%= user.email %></p>
           <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
         </div>

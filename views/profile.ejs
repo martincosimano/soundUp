@@ -4,18 +4,18 @@
     <div class="col-lg-6">
       <div class="card">
         <div class="card-header">
-          <h3>User Profile</h3>
+          <h3>Profile</h3>
         </div>
         <div class="card-body">
-          <p><strong>User Name</strong>: <%= user.userName %></p>
+          <p class="username"><strong>Name</strong>: <%= user.userName %></p>
           <p><strong>Email</strong>: <%= user.email %></p>
-          <a href="/logout" class="btn btn-primary">Logout</a>
+          <a href="/logout" class="btn btn-primary">Log Out</a>
         </div>
       </div>
       
       <div class="card mt-5">
         <div class="card-header">
-          <h3>Add a Post</h3>
+          <h3>Create a Post</h3>
         </div>
         <div class="card-body">
           <!-- Conditionally render the error message if it exists -->
@@ -26,21 +26,21 @@
           <form action="/post/createPost" enctype="multipart/form-data" method="POST">
             <div class="mb-3">
               <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" name="title">
+              <input type="text" class="form-control" id="title" placeholder="Title" name="title">
             </div>
             <div class="mb-3">
               <label for="caption" class="form-label">Caption</label>
-              <textarea class="form-control" id="caption" name="caption"></textarea>
+              <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
             </div>
             <div class="mb-3">
               <label for="songName" class="form-label">Song Name</label>
-              <input type="search" id="songName" name="songName" class="form-control">
+              <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control">
             </div>
             <div class="mb-3">
               <label for="artistName" class="form-label">Artist Name</label>
-              <input type="search" id="artistName" name="artistName" class="form-control">
+              <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control">
             </div>
-            <button type="submit" class="btn btn-primary" value="Upload">Submit</button>
+            <button type="submit" class="btn btn-primary" value="Upload">Create</button>
           </form>
         </div>
       </div>
@@ -51,22 +51,28 @@
         <h5 class="card-header">Recent Posts</h5>
         <div class="card-body">
           <ul class="list-unstyled">
-            <% for(var i=0; i<posts.length; i++) {%>
-            <li class="mb-4">
-              <a href="/post/<%= posts[i]._id%>">
-                <h2><%= posts[i].title%></h2>
-              </a>
-              <p><%= posts[i].caption %></p>
-              <% if(posts[i].spotifyTrackId){ %>
-                <iframe src="https://open.spotify.com/embed/track/<%= posts[i].spotifyTrackId %>" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            <% posts.forEach(function(post, index) { %>
+              <li class="mb-4">
+                <a href="/post/<%= post._id %>">
+                  <h2><%= post.title %></h2>
+                </a>
+                <p><%= post.caption %></p>
+                <% if(post.spotifyTrackId) { %>
+                  <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                <% } %>
+              </li>
+              <% if(index === 2 && posts.length > 2) { %>
+                <li class="mb-4">
+                  <a class="btn btn-primary" href="/profile/userfeed">See More Posts</a>
+                </li>
               <% } %>
-            </li>
-            <% } %>
+            <% }); %>
           </ul>
         </div>
+        
       </div>
       <div class="btn-group d-flex" role="group">
-        <a class="btn btn-primary w-100" href="/feed">Return to Feed</a>
+        <a class="btn btn-primary w-100" href="/feed">Feed</a>
       </div>
     </div>
   </div>
