@@ -4,13 +4,11 @@
     <div class="col-md-8">
       <h2 class="mb-4"><%= post.title %></h2>
       <p><%= post.caption %></p>
-      <h3>Song: <%= post.songName %></h3>
-      <h4>Artist: <%= post.artistName %></h4>
-      <div class="d-flex justify-content-between align-items-center">
+      <h3 class="mb-0"><%= post.likes %> likes</h3>
+      <div class="d-flex justify-content-center align-items-center">
         <form action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
           <button class="btn btn-outline-primary btn-sm fa fa-heart" type="submit"></button>
         </form>
-        <h3 class="mb-0"><%= post.likes %> likes</h3>
         <%if(post.user == user.id){ %>
         <form action="/post/deletePost/<%= post.id %>?_method=DELETE" method="POST">
           <button class="btn btn-outline-danger btn-sm fa fa-trash" type="submit"></button>
@@ -25,10 +23,9 @@
     <div class="col-md-4 mt-5 mt-md-0">
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">Profile Information</h5>
-          <p class="card-text username">Name: <%= user.userName %></p>
-          <p class="card-text">Email: <%= user.email %></p>
-          <a href="/profile/edit" class="btn btn-primary">Edit Profile</a>
+          <h5 class="card-title">Created by</h5>
+          <p class="card-text username">Name: <%= post.createdByUser %></p>
+          <a href="/post/<%= post._id %>" class="btn btn-primary">Go to User Profile</a>
         </div>
       </div>
       <div class="card mt-4">
@@ -37,7 +34,6 @@
           <% for(var i=0; i<relatedPosts.length; i++){ %>
           <div class="mb-3">
             <a href="/post/<%= relatedPosts[i].id %>"><%= relatedPosts[i].title %></a>
-            <p><%= relatedPosts[i].caption %></p>
           </div>
           <% } %>
         </div>
@@ -51,5 +47,4 @@
     </div>
   </div>
 </div>
-
 <%- include('partials/footer') -%>

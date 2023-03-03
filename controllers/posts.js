@@ -13,6 +13,20 @@ module.exports = {
       console.log(err);
     }
   },
+  likePost: async (req, res) => {
+    try {
+      await Post.findOneAndUpdate(
+        { _id: req.params.id },
+        {
+          $inc: { likes: 1 },
+        }
+      );
+      console.log("Likes +1");
+      res.redirect(`/post/${req.params.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  },
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
@@ -28,7 +42,6 @@ module.exports = {
         $or: [
           { songName: post.songName },
           { artistName: post.artistName },
-          { genre: post.genre },
         ],
       }).limit(3);
       res.render("post.ejs", {
@@ -78,10 +91,12 @@ module.exports = {
             artistName,
             spotifyTrackId: trackData.tracks.items[0].id,
             user: req.user?.id,
+            createdByUser: req.user?.userName,
+            createdByMail: req.user?.email,
         });
 
         console.log('Post has been added!');
-        res.redirect('/profile');
+        res.redirect('/profile/:id');
     } catch (err) {
         console.log(err);
 
@@ -89,7 +104,7 @@ module.exports = {
         req.flash('error', err.message);
 
         // Redirect to the profile page
-        res.redirect('/profile');
+        res.redirect('/profile/:id');
     }
 },
   likePost: async (req, res) => {
@@ -111,9 +126,9 @@ module.exports = {
       let post = await Post.findById({ _id: req.params.id });
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile");
+      res.redirect("/profile/:id");
     } catch (err) {
-      res.redirect("/profile");
+      res.redirect("/profile/:id");
     }
   }
 };

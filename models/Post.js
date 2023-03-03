@@ -33,6 +33,14 @@ const postSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  createdByUser: {
+    type: String,
+    required: true,
+  },
+  createdByMail: {
+    type: String,
+    required: true,
+  }
 });
 
 //MongoDB Collection named here - will give lowercase plural of name 
