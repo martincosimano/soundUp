@@ -11,7 +11,17 @@ module.exports = {
       const user = await User.findById(req.params.id);
       const limit = 3;
       const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).limit(limit).lean();
-      res.render("profile.ejs", { posts: posts, user: user, currentUserID: req.user ? req.user._id : null, flash: req.flash(), user: req.params.id });
+  
+      // Check if the authenticated user is viewing their own profile
+      const isCurrentUser = req.user && req.user._id.toString() === req.params.id;
+  
+      res.render("profile.ejs", {
+        posts: posts,
+        user: user,
+        currentUserID: req.user ? req.user._id : null,
+        flash: req.flash(),
+        isCurrentUser: isCurrentUser // Pass the boolean to the view
+      });
     } catch (err) {
       console.log(err);
     }
