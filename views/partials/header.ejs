@@ -29,12 +29,13 @@
     <header class="container">
       <div class="text-center">
         <% if (user && user._id) { %>
-          <h1><a href="/profile/<%=user._id%>">Song UP</a></h1>
+          <h1><a href="/profile/<%=currentUserID%>">Song UP</a></h1>
         <% } else { %>
           <h1>Song UP</h1>
         <% } %>
         <span>Music The Great Communicator</span>
       </div>
     </header>
+    
   </body>
 </html>

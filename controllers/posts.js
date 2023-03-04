@@ -11,7 +11,7 @@ module.exports = {
       const user = await User.findById(req.params.id);
       const limit = 3;
       const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).limit(limit).lean();
-      res.render("profile.ejs", { posts: posts, user: user, flash: req.flash() });
+      res.render("profile.ejs", { posts: posts, user: user, currentUserID: req.user ? req.user._id : null, flash: req.flash() });
     } catch (err) {
       console.log(err);
     }
@@ -33,7 +33,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts, user: req.user });
+      res.render("feed.ejs", { posts: posts, user: req.user, currentUserID: req.user ? req.user._id : null });
     } catch (err) {
       console.log(err);
     }
@@ -53,6 +53,7 @@ module.exports = {
         user: req.user,
         relatedPosts: relatedPosts,
         comments: comments,
+        currentUserID: req.user ? req.user._id : null,
       });
     } catch (err) {
       console.log(err);

@@ -57,9 +57,11 @@
         <div class="card-body">
           <h5 class="card-title">Created by</h5>
           <p class="card-text username"><%= post.userName %></p>
-          <a href="/profile/<%=post.user%>" class="btn btn-primary">Go to User Profile</a>
+          <% if (user && user._id && user._id != post.user) { %>
+            <a href="/profile/<%=post.user%>" class="btn btn-primary">Go to User Profile</a>
+          <% } %>
         </div>
-      </div>
+      </div>      
       <div class="card mt-4">
         <div class="card-body">
           <h5 class="card-title">Related Posts</h5>
