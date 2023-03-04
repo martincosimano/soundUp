@@ -28,7 +28,11 @@
   <body>
     <header class="container">
       <div class="text-center">
-        <h1 class=""><a href="/profile">Song UP</a></h1>
+        <% if (user && user._id) { %>
+          <h1><a href="/profile/<%=user._id%>">Song UP</a></h1>
+        <% } else { %>
+          <h1>Song UP</h1>
+        <% } %>
         <span>Music The Great Communicator</span>
       </div>
     </header>

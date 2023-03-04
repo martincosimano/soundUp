@@ -33,7 +33,7 @@ module.exports = {
   getFeed: async (req, res) => {
     try {
       const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { posts: posts });
+      res.render("feed.ejs", { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -61,7 +61,7 @@ module.exports = {
   getUserFeed: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
-      res.render("profile/userfeed.ejs", { posts: posts });
+      res.render('profile/userfeed.ejs', { posts: posts, user: req.user });
     } catch (err) {
       console.log(err);
     }
@@ -101,7 +101,7 @@ module.exports = {
         });
 
         console.log('Post has been added!');
-        res.redirect('/profile/:id');
+        res.redirect(`/profile/${req.user._id}`);
     } catch (err) {
         console.log(err);
 
@@ -109,7 +109,7 @@ module.exports = {
         req.flash('error', err.message);
 
         // Redirect to the profile page
-        res.redirect('/profile/:id');
+        res.redirect(`/profile/${req.user._id}`);
     }
 },
   likePost: async (req, res) => {
@@ -131,9 +131,9 @@ module.exports = {
       let post = await Post.findById({ _id: req.params.id });
       await Post.remove({ _id: req.params.id });
       console.log("Deleted Post");
-      res.redirect("/profile/:id");
+      res.redirect(`/profile/${req.user._id}`);
     } catch (err) {
-      res.redirect("/profile/:id");
+      res.redirect(`/profile/${req.user._id}`);
     }
   }
 };

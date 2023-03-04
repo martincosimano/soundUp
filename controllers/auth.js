@@ -6,9 +6,7 @@ exports.getLogin = (req, res) => {
   if (req.user) {
     return res.redirect(`/profile/${req.user._id}`);
   }
-  res.render("login", {
-    title: "Login",
-  });
+  res.render("login", { title: "Login", user: req.user });
 };
 
 exports.postLogin = (req, res, next) => {
@@ -60,9 +58,7 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect(`/profile/${req.user._id}`);
   }
-  res.render("signup", {
-    title: "Create Account",
-  });
+  res.render("signup", { title: "Create Account", user: req.user });
 };
 
 exports.postSignup = (req, res, next) => {
