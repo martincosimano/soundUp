@@ -36,7 +36,7 @@
               <div class="mb-3 d-flex justify-content-center">
                 <div class="d-flex flex-column align-items-center">
                   <div class="d-flex justify-content-center mb-2">
-                    <a href="/profile" class="username"> <%=comments[i].userName%>:</a>
+                    <a href="/profile/<%=comments[i].user%>" class="username"> <%=comments[i].userName%>:</a>
                     <p><%= comments[i].comment%></p>
                       <%if(comments[i].user == user.id){ %>
                         <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
