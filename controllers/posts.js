@@ -11,7 +11,7 @@ module.exports = {
       const user = await User.findById(req.params.id);
       const limit = 3;
       const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).limit(limit).lean();
-      res.render("profile.ejs", { posts: posts, user: user, currentUserID: req.user ? req.user._id : null, flash: req.flash() });
+      res.render("profile.ejs", { posts: posts, user: user, currentUserID: req.user ? req.user._id : null, flash: req.flash(), user: req.params.id });
     } catch (err) {
       console.log(err);
     }
@@ -61,8 +61,8 @@ module.exports = {
   },
   getUserFeed: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.user.id }).sort({ createdAt: "desc" }).lean();
-      res.render('profile/userfeed.ejs', { posts: posts, user: req.user });
+      const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).lean();
+      res.render('profile/userfeed.ejs', { posts: posts, user: req.user, currentUserID: req.user ? req.user._id : null });
     } catch (err) {
       console.log(err);
     }
