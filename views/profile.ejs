@@ -9,41 +9,46 @@
         <div class="card-body">
           <p class="username"><strong>Name</strong>: <%= user.userName %></p>
           <p><strong>Email</strong>: <%= user.email %></p>
-          <a href="/logout" class="btn btn-primary">Log Out</a>
-        </div>
-      </div>
-      <div class="card mt-5">
-        <div class="card-header">
-          <h3>Create a Post</h3>
-        </div>
-        <div class="card-body">
-          <!-- Conditionally render the error message if it exists -->
-          <% if (flash.error) { %>
-            <p class="text-danger"><%= flash.error %></p>
+          <% if (isCurrentUser) { %>
+            <a href="/logout" class="btn btn-primary">Log Out</a>
           <% } %>
-
-          <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-            <div class="mb-3">
-              <label for="title" class="form-label">Title</label>
-              <input type="text" class="form-control" id="title" placeholder="Title" name="title">
-            </div>
-            <div class="mb-3">
-              <label for="caption" class="form-label">Caption</label>
-              <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
-            </div>
-            <div class="mb-3">
-              <label for="songName" class="form-label">Song Name</label>
-              <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control">
-            </div>
-            <div class="mb-3">
-              <label for="artistName" class="form-label">Artist Name</label>
-              <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary" value="Upload">Create</button>
-          </form>
         </div>
       </div>
+      <% if (isCurrentUser) { %>
+        <div class="card mt-5">
+          <div class="card-header">
+            <h3>Create a Post</h3>
+          </div>
+          <div class="card-body">
+            <!-- Conditionally render the error message if it exists -->
+            <% if (flash.error) { %>
+              <p class="text-danger"><%= flash.error %></p>
+            <% } %>
+    
+            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+              <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+              </div>
+              <div class="mb-3">
+                <label for="caption" class="form-label">Caption</label>
+                <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="songName" class="form-label">Song Name</label>
+                <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="artistName" class="form-label">Artist Name</label>
+                <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary" value="Upload">Create</button>
+            </form>
+          </div>
+        </div>
+      <% } %>
     </div>
+
     <div class="col-lg-6">
       <div class="card mb-4">
         <h5 class="card-header">Recent Posts</h5>
