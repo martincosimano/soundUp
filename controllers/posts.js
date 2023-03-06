@@ -126,21 +126,28 @@ module.exports = {
 likePost: async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
+    const user = req.user;
 
-    if (post.likedBy.includes(req.user._id)) {
-      console.log("User already liked this post");
-      return res.redirect(`/post/${req.params.id}`);
+    if (post.likedBy.includes(user._id)) {
+      await Post.updateOne(
+        { _id: req.params.id },
+        {
+          $inc: { likes: -1 },
+          $pull: { likedBy: user._id }
+        }
+      );
+      console.log("Down liked");
+    } else {
+      await Post.updateOne(
+        { _id: req.params.id },
+        {
+          $inc: { likes: 1 },
+          $push: { likedBy: user._id }
+        }
+      );
+      console.log("Liked");
     }
 
-    await Post.updateOne(
-      { _id: req.params.id },
-      {
-        $inc: { likes: 1 },
-        $push: { likedBy: req.user._id },
-      }
-    );
-
-    console.log("Likes +1");
     res.redirect(`/post/${req.params.id}`);
   } catch (err) {
     console.log(err);
