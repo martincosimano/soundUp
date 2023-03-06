@@ -40,7 +40,11 @@ const postSchema = new mongoose.Schema({
   email: {
     type: String,
     ref: "User",
-  }
+  },
+  likedBy: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  }]
 });
 
 //MongoDB Collection named here - will give lowercase plural of name 
