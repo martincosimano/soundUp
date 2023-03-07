@@ -2,6 +2,7 @@ const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const { getApiToken, searchTrack } = require("../services/spotify");
 const User = require("../models/User");
+const moment = require('moment');
 
 
 // Post controller functions
@@ -58,12 +59,17 @@ module.exports = {
           { artistName: post.artistName },
         ],
       }).sort({ createdAt: "desc"}).limit(3);
+      
+      // Calculate the time since the post was created
+      const timeSincePost = moment(post.createdAt).fromNow();
+      
       res.render("post.ejs", {
         post: post,
         user: req.user,
         relatedPosts: relatedPosts,
         comments: comments,
         currentUserID: req.user ? req.user._id : null,
+        timeSincePost: timeSincePost
       });
     } catch (err) {
       console.log(err);

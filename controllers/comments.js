@@ -1,21 +1,23 @@
 const Comment = require("../models/Comment");
+const moment = require('moment');
 
 module.exports = {
     createComment: async (req, res) => {
         try {
-            await Comment.create({
-                comment: req.body.comment,
-                likes: 0,
-                post: req.params.id,
-                user: req.user?.id,
-                userName: req.user?.userName,
-            });
-            console.log("Comment has been added!");
-            res.redirect("/post/"+req.params.id);
-        }   catch (err) {
-            console.log(err);
+          const comment = await Comment.create({
+            comment: req.body.comment,
+            likes: 0,
+            post: req.params.id,
+            user: req.user?.id,
+            userName: req.user?.userName,
+            createdAt: moment().format('YYYY-MM-DD HH:mm:ss')
+          });
+          console.log('Comment has been added!');
+          res.redirect('/post/' + req.params.id);
+        } catch (err) {
+          console.log(err);
         }
-    },
+      },
     deleteComment: async (req, res) => {
         try {
           let comment = await Comment.findById({ _id: req.params.id });
