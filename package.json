@@ -1,7 +1,7 @@
 {
-  "name": "song-up-app",
+  "name": "sound-up-app",
   "version": "1.0.0",
-  "description": "Song UP APP",
+  "description": "Sound UP APP",
   "main": "server.js",
   "scripts": {
     "start": "nodemon server.js",
