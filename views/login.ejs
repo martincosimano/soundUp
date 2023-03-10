@@ -1,36 +1,38 @@
 <%- include('partials/header') -%>
 
-<main class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6 col-lg-5 mt-5">
-      <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
-      <div class="alert alert-danger"><%= el.msg %></div>
-      <% }) %> <% } %> <% if (locals.messages.info) { %> <%
-      messages.info.forEach( el => { %>
-      <div class="alert alert-info"><%= el.msg %></div>
-      <% }) %> <% } %>
-      <div class="card">
-        <div class="card-body">
-          <h3 class="card-title text-center mb-4">Log In</h3>
-          <form action="/login" method="POST">
-            <div class="mb-3">
-              <label for="exampleInputEmail1" class="form-label">Email address</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" name="email">
-              <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-            </div>
-            <div class="mb-3">
-              <label for="exampleInputPassword1" class="form-label">Password</label>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
-            </div>
-            <button type="submit" class="btn btn-primary w-100 mt-4">Log In</button>
-          </form>
-          <hr>
-          <p class="card-text text-center">Don't have an account? <a href="/signup">Register</a></p>
+<div class="container-general">
+  <main class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-5 mt-5">
+        <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
+        <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %> <% } %> <% if (locals.messages.info) { %> <%
+        messages.info.forEach( el => { %>
+        <div class="alert alert-info"><%= el.msg %></div>
+        <% }) %> <% } %>
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title text-center mb-4">Log In</h3>
+            <form action="/login" method="POST">
+              <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" name="email">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+              </div>
+              <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+              </div>
+              <button type="submit" class="btn w-100 mt-4 login-log-in btn-new">Log In</button>
+            </form>
+            <hr>
+            <p class="card-text text-center">Don't have an account? <a href="/signup">Register</a></p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</main>
+  </main>
+</div>
 
 
 <%- include('partials/footer') -%>

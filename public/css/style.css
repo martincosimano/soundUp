@@ -1,12 +1,15 @@
 :root {
-  --clr-background-primary: #131114 ;
-  --clr-background-secondary: rgb(216, 209, 203);
+  --clr-background-header: #000000;
+  --clr-background-primary: #080808 ;
+  --clr-background-secondary: #101010;
+  --clr-background-tertiary: #1e1e1e;
+  --clr-background-border: #606061;
 
   --clr-font-pdark: #000000;
   --clr-font-plight: #ffffff;
-  --clr-font-secondary: #3ad404;
-  --clr-font-terceary: #cbcbcb;
-  --clr-font-extras: #5b5b5b;
+  --clr-font-secondary: #6622d4;
+  --clr-font-tertiary: #cbcbcb;
+  --clr-font-extras: #6c757d;
 
   --fs-xl: 2.25rem; 
   --fs-600: 1.25rem;
@@ -30,12 +33,35 @@
 /******************************************
 /* BASE STYLES
 /*******************************************/
+/* General */
 html {
   scroll-behavior: smooth;
 }
+body {
+  background-color: var(--clr-background-primary);
+}
 a {
   text-decoration: none;
+  color:var(--clr-font-secondary);
 }
+a:hover {
+  color: var(--clr-font-secondary);
+  opacity: 0.9;
+}
+.card {
+  background-color: var(--clr-background-secondary);
+}
+input {
+  color: var(--clr-font-extras) !important;
+  background-color: var(--clr-background-tertiary) !important;
+  border-color: var(--clr-background-border) !important;
+}
+input:focus,
+.btn:focus {
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Index */
 .index-log-container {
   background-image: url("../imgs/mobileLeft.jpg");
   background-position: center;
@@ -49,16 +75,16 @@ a {
   background-repeat: no-repeat;
   height: 40rem;
 }
-.log-in {
+.index-log-in {
   color: var(--clr-font-pdark);
 }
 .index-p {
-  color: var(--clr-font-terceary);
+  color: var(--clr-font-tertiary);
   font-family: var(--ff-primary);
   font-size: var(--fs-600);
   font-weight: lighter;
 }
-.h1-index
+h1
  {
   color: var(--clr-font-plight);
   font-family: var(--ff-title);
@@ -67,32 +93,44 @@ a {
 #titleSpan {
   color: var(--clr-font-secondary);
 }
-.register {
+.index-register {
   color: var(--clr-font-plight)
 }
-.log-in,
-.register {
+.index-log-in,
+.index-register {
   font-family: var(--ff-secondary);
   font-weight: bold;
   font-size: var(--fs-500);
 }
-.h1-index,
-.log-in,
-.register {
+h1,
+.index-log-in,
+.index-register {
   text-transform: uppercase;
+}
+
+/* Log In */
+.login-log-in,
+h3,
+label,
+.card-text {
+  color: var(--clr-font-plight);
+}
+.login-register {
+  color: var(--clr-font-secondary);
 }
 /******************************************
 /* LAYOUT
 /*******************************************/
-
+/* General */
 main {
   max-width: 100%;
+  min-width: 100%;
 }
-
+/* Index */
 .index-log-box {
   margin-top: 6rem;
 }
-.log-in {
+.index-log-in {
   padding-block: 1.125rem;
 }
 .index-p {
@@ -104,19 +142,18 @@ main {
 .index-log-container-box {
   margin-top: 5rem;
 }
-.register {
+.index-register {
   margin-top: 2rem !important;
 }
-
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
-
-.log-in {
+/* Index */
+.index-log-in {
   background: white;
   border-radius: 3.125rem;
 }
-.register {
+.index-register {
   border: 0.125rem solid white;
   color: white;
   padding: 0.75rem 1.5rem;
@@ -142,7 +179,16 @@ main {
   100%{background-color: white; color: black;}
 }
 
-
+/* Log In */
+.login-log-in {
+  background-color: var(--clr-font-secondary);
+  border-color: var(--clr-font-secondary);
+}
+.btn-new:hover {
+  background-color: var(--clr-font-secondary);
+  opacity: 0.9;
+  color: var(--clr-font-plight);
+}
 
 /******************************************
 /* MEDIA QUERY
@@ -153,7 +199,7 @@ main {
 /******************************************
 /* BASE STYLES
 /*******************************************/
-
+/* Index */
   .index-container-image {
     background-image: url("../imgs/Index.jpg");
     background-attachment: fixed;
@@ -165,7 +211,7 @@ main {
   background-image: none;
   justify-content: start !important;
  }
- .h1-index,
+ .index-h1,
  .index-p {
   text-align: initial !important;
  }
@@ -175,10 +221,8 @@ main {
 /******************************************
 /* LAYOUT
 /*******************************************/
-.index-img-container {
-  display: none;
-}
-.index-container-contain {
+/* General */
+.container-general {
   min-height: 100vh;
   max-width: 100% !important;
   display: flex;
@@ -186,8 +230,10 @@ main {
   margin-inline: auto;
   width: min(90%, 70.5rem);
 }
-main {
-  min-width: 100%;
+
+/* Index */
+.index-img-container {
+  display: none;
 }
 
 .index-log-box {
@@ -198,16 +244,16 @@ main {
 .index-log-container-box {
   margin-top: 0rem;
 }
-.register {
+.index-register {
   margin-block: 1rem !important;
 }
-.log-in,
-.register {
+.index-log-in,
+.index-register {
   padding-inline: 2rem;
   padding-block: 0.5rem;
   font-size: var(--fs-300);
 }
-.arrow-index {
+.index-arrow {
   padding-left: 1rem;
 }
 .index-p {
