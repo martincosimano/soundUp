@@ -31,12 +31,7 @@
 /* BASE STYLES
 /*******************************************/
 html {
-  background-color: #0f1010;
   scroll-behavior: smooth;
-}
-.log-container {
-  width: 100%;
-  margin-inline: 0;
 }
 a {
   text-decoration: none;
@@ -89,6 +84,10 @@ a {
 /******************************************
 /* LAYOUT
 /*******************************************/
+
+main {
+  max-width: 100%;
+}
 
 .log-box {
   margin-top: 6rem;
@@ -150,16 +149,28 @@ a {
 /*******************************************/
 
 
-@media (min-width: 40rem) {
+@media (min-width: 50rem) {
 /******************************************
 /* BASE STYLES
 /*******************************************/
+
+  body {
+    background-image: url("../imgs/Index2.jpg");
+    background-attachment: fixed;
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
  .log-container {
-  background-image: url("../imgs/Index2.jpg");
+  background-image: none;
+  justify-content: start !important;
  }
  .h1-index,
  .index-p {
   text-align: initial !important;
+ }
+ .index-p {
+  font-size: var(--fs-500);
  }
 /******************************************
 /* LAYOUT
@@ -167,10 +178,25 @@ a {
 .index-img-container {
   display: none;
 }
+.container-contain {
+  min-height: 100vh;
+  max-width: 100% !important;
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  width: min(90%, 70.5rem);
+}
+main {
+  min-width: 100%;
+}
+
 .log-box {
   flex-direction: row !important;
   margin-inline: 0 !important;
-  justify-content: space-between;
+  gap: 5rem;
+}
+.log-container-box {
+  margin-top: 0rem;
 }
 .register {
   margin-block: 1rem !important;
@@ -183,6 +209,14 @@ a {
 }
 .arrow-index {
   padding-left: 1rem;
+}
+.index-p {
+  width: 80%;
+}
+.log-container {
+  display: flex !important;
+  align-items: center !important;
+  padding-bottom: 0rem;
 }
 
 }
