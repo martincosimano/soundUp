@@ -36,7 +36,7 @@ html {
 a {
   text-decoration: none;
 }
-.log-container {
+.index-log-container {
   background-image: url("../imgs/mobileLeft.jpg");
   background-position: center;
   background-size: cover;
@@ -89,7 +89,7 @@ main {
   max-width: 100%;
 }
 
-.log-box {
+.index-log-box {
   margin-top: 6rem;
 }
 .log-in {
@@ -98,10 +98,10 @@ main {
 .index-p {
   margin-top: 5rem;
 }
-.log-container {
+.index-log-container {
   padding-bottom: 9rem;
 }
-.log-container-box {
+.index-log-container-box {
   margin-top: 5rem;
 }
 .register {
@@ -154,14 +154,14 @@ main {
 /* BASE STYLES
 /*******************************************/
 
-  .container-image {
-    background-image: url("../imgs/Index2.jpg");
+  .index-container-image {
+    background-image: url("../imgs/Index.jpg");
     background-attachment: fixed;
     background-position: center; 
     background-size: cover;
     background-repeat: no-repeat;
   }
- .log-container {
+ .index-log-container {
   background-image: none;
   justify-content: start !important;
  }
@@ -178,7 +178,7 @@ main {
 .index-img-container {
   display: none;
 }
-.container-contain {
+.index-container-contain {
   min-height: 100vh;
   max-width: 100% !important;
   display: flex;
@@ -190,12 +190,12 @@ main {
   min-width: 100%;
 }
 
-.log-box {
+.index-log-box {
   flex-direction: row !important;
   margin-inline: 0 !important;
   gap: 5rem;
 }
-.log-container-box {
+.index-log-container-box {
   margin-top: 0rem;
 }
 .register {
@@ -213,7 +213,7 @@ main {
 .index-p {
   width: 80%;
 }
-.log-container {
+.index-log-container {
   display: flex !important;
   align-items: center !important;
   padding-bottom: 0rem;
