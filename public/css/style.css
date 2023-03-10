@@ -154,7 +154,7 @@ main {
 /* BASE STYLES
 /*******************************************/
 
-  body {
+  .container-image {
     background-image: url("../imgs/Index2.jpg");
     background-attachment: fixed;
     background-position: center; 
