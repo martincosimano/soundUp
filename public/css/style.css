@@ -42,12 +42,12 @@ body {
 }
 a {
   text-decoration: none;
-  color:var(--clr-font-secondary);
+  /* color:var(--clr-font-secondary); */
 }
-a:hover {
+/* a:hover {
   color: var(--clr-font-secondary);
   opacity: 0.9;
-}
+} */
 .card {
   background-color: var(--clr-background-secondary);
 }
@@ -122,9 +122,20 @@ label,
 /* LAYOUT
 /*******************************************/
 /* General */
+.container-general {
+  min-height: 100vh;
+  max-width: 100% !important;
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+}
 main {
   max-width: 100%;
   min-width: 100%;
+}
+.content-container {
+  padding-inline: 1rem;
+  padding-block: 2rem;
 }
 /* Index */
 .index-log-box {
@@ -145,9 +156,19 @@ main {
 .index-register {
   margin-top: 2rem !important;
 }
+.row {
+  --bs-gutter-x: 0rem !important;
+}
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
+/* General */
+.btn-new:hover {
+  background-color: var(--clr-font-secondary);
+  opacity: 0.9;
+  color: var(--clr-font-plight);
+}
 /* Index */
 .index-log-in {
   background: white;
@@ -184,11 +205,6 @@ main {
   background-color: var(--clr-font-secondary);
   border-color: var(--clr-font-secondary);
 }
-.btn-new:hover {
-  background-color: var(--clr-font-secondary);
-  opacity: 0.9;
-  color: var(--clr-font-plight);
-}
 
 /******************************************
 /* MEDIA QUERY
@@ -223,11 +239,6 @@ main {
 /*******************************************/
 /* General */
 .container-general {
-  min-height: 100vh;
-  max-width: 100% !important;
-  display: flex;
-  align-items: center;
-  margin-inline: auto;
   width: min(90%, 70.5rem);
 }
 

@@ -1,9 +1,9 @@
 <%- include('partials/header') -%>
 
 <div class="container-general">
-  <main class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 col-lg-5 mt-5">
+  <main>
+    <div class="row justify-content-center align-center">
+      <div class="col-lg-6 col-md-8 col-sm-10 content-container">
         <% if (locals.messages.errors) { %> <% messages.errors.forEach( el => { %>
         <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %> <% } %> <% if (locals.messages.info) { %> <%
