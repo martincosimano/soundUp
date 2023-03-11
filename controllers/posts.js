@@ -58,30 +58,36 @@ module.exports = {
   },
   getPost: async (req, res) => {
     try {
-      const post = await Post.findById(req.params.id);
-      const comments = await Comment.find({post: req.params.id}).sort({ createdAt: "desc"}).lean();
-      const relatedPosts = await Post.find({
-        $or: [
-          { songName: post.songName },
-          { artistName: post.artistName },
-        ],
-      }).sort({ createdAt: "desc"}).limit(3);
-      
-      // Calculate the time since the post was created
-      const timeSincePost = moment(post.createdAt).fromNow();
-      
-      res.render("post.ejs", {
-        post: post,
-        user: req.user,
-        relatedPosts: relatedPosts,
-        comments: comments,
-        currentUserID: req.user ? req.user._id : null,
-        timeSincePost: timeSincePost
-      });
+        const post = await Post.findById(req.params.id);
+        const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();
+        const relatedPosts = await Post.find({
+            $or: [
+                { songName: post.songName },
+                { artistName: post.artistName },
+            ],
+        }).sort({ createdAt: "desc" }).limit(3);
+
+        // Calculate the time since the post was created
+        const timeSincePost = moment(post.createdAt).fromNow();
+
+        // Calculate the time since each comment was created
+        const commentsWithTimeSince = comments.map((comment) => {
+            const timeSinceComment = moment(comment.createdAt).fromNow();
+            return { ...comment, timeSinceComment };
+        });
+
+        res.render("post.ejs", {
+            post: post,
+            user: req.user,
+            relatedPosts: relatedPosts,
+            comments: commentsWithTimeSince,
+            currentUserID: req.user ? req.user._id : null,
+            timeSincePost: timeSincePost
+        });
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  },
+},
   getUserFeed: async (req, res) => {
     try {
       const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).lean();

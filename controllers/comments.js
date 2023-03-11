@@ -4,8 +4,6 @@ const moment = require('moment');
 module.exports = {
     createComment: async (req, res) => {
         try {
-      //           // Calculate the time since the post was created
-      // const timeSincePost = moment(comment.createdAt).fromNow();
           const comment = await Comment.create({
             comment: req.body.comment,
             likes: 0,

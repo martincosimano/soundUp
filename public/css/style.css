@@ -192,6 +192,10 @@ main {
  .profile-btn-visit {
   width: 30%;
 }
+.post-textarea {
+  width: 90%;
+}
+
 
 /******************************************
 /* ADDITIONAL STYLES
@@ -241,6 +245,19 @@ main {
 .login-log-in {
   background-color: var(--clr-font-secondary);
   border-color: var(--clr-font-secondary);
+}
+
+/* Profile */
+.username-post {
+  white-space: nowrap;
+  align-self: flex-start !important;
+}
+.comment-text {
+  word-break: break-word;
+  text-align: initial;
+}
+.relatedposts {
+  text-transform: capitalize;
 }
 
 
