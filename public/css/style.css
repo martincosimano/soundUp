@@ -67,6 +67,26 @@ textarea:focus {
   background-color: var(--clr-background-secondary);
 }
 
+/* Header */
+.navbar-logout {
+  color: var(--clr-font-secondary) !important;
+  margin-inline: 2rem;
+}
+.navbar-logout:hover {
+  color: var(--clr-font-plight) !important;
+}
+.navbar-user,
+.navbar-home {
+  color: var(--clr-font-plight) !important;
+}
+.navbar-home:hover {
+  color: var(--clr-font-plight);
+  opacity: 0.9;
+}
+.navbar-home {
+  margin-left: 2rem;
+}
+
 /* Index */
 .index-log-container {
   background-image: url("../imgs/mobileLeft.jpg");
@@ -165,6 +185,7 @@ main {
   padding-inline: 1rem;
   padding-block: 2rem;
 }
+
 /* Index */
 .index-log-box {
   margin-top: 6rem;
@@ -221,6 +242,10 @@ main {
   padding: 0.75rem 1.5rem;
   border-radius: 0.2rem;
 }
+.login-span {
+    flex-grow: 1;
+}
+
 .animation-fc {
   text-shadow: 0.125rem 0.125rem 0.25rem #000000;
   animation: animation-fc 7s ease-in-out;
@@ -334,6 +359,11 @@ main {
 /* Feed */
 .feed-container {
   justify-content: initial !important;
+}
+
+/* Post */
+.post-content-container {
+  padding-top: 2rem !important;
 }
 
 }
