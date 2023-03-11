@@ -72,20 +72,19 @@ textarea:focus {
   color: var(--clr-font-secondary) !important;
   margin-inline: 2rem;
 }
-.navbar-logout:hover {
-  color: var(--clr-font-plight) !important;
-}
 .navbar-user,
 .navbar-home {
   color: var(--clr-font-plight) !important;
 }
+.navbar-logout:hover,
 .navbar-home:hover {
-  color: var(--clr-font-plight);
+  color: var(--clr-font-plight) !important;
   opacity: 0.9;
 }
-.navbar-home {
-  margin-left: 2rem;
+.navbar-logo {
+  padding-left: 2rem;
 }
+
 
 /* Index */
 .index-log-container {
