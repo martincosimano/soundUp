@@ -127,11 +127,11 @@ label,
 
 /* Profile */
 .profile-log-out,
-.profile-visit {
+.post-visit {
   color: var(--clr-font-plight);
 }
 .profile-log-out:hover,
-.profile-visit:hover {
+.post-visit:hover {
   color: var(--clr-font-plight);
 }
 .username {
@@ -141,6 +141,10 @@ label,
   color: var(--clr-font-primary);
 }
 
+/* Feed */
+.feed-username {
+  color: var(--clr-font-plight);
+}
 
 /******************************************
 /* LAYOUT
@@ -184,11 +188,10 @@ main {
   --bs-gutter-x: 0rem !important;
 }
 
-/* Profile */
-.profile-btn-visit {
+ /* Profile */
+ .profile-btn-visit {
   width: 30%;
 }
-
 
 /******************************************
 /* ADDITIONAL STYLES
@@ -240,8 +243,6 @@ main {
   border-color: var(--clr-font-secondary);
 }
 
-/* Profile */
-
 
 /******************************************
 /* MEDIA QUERY
@@ -271,6 +272,7 @@ main {
  .index-p {
   font-size: var(--fs-500);
  }
+
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -310,6 +312,11 @@ main {
   display: flex !important;
   align-items: center !important;
   padding-bottom: 0rem;
+}
+
+/* Feed */
+.feed-container {
+  justify-content: initial !important;
 }
 
 }
