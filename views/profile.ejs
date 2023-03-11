@@ -67,12 +67,12 @@
                   <!-- <p><%= post.caption %></p> -->
                   <% if(post.spotifyTrackId) { %>
                     <div class="iframe-container px-3 py-4">
-                      <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="90%" height="304" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                      <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="90%" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                       <div class="d-flex justify-content-center">
                         <button class="btn btn-new profile-btn-visit">
                           <span class="d-flex justify-content-between w-100">
                             <span class="text-center flex-fill gotopost"><a class="profile-visit" href="/post/<%= post._id %>">View Post</a></span>
-                            <span class="ml-3 arrowh"><i class="fa-solid fa-share"></i></span>
+                            <span class="ml-3"><i class="fa-solid fa-share"></i></span>
                           </span>
                         </button>
                       </div>
