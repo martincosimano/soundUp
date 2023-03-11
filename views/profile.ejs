@@ -1,82 +1,96 @@
 <%- include('partials/header') -%>
-<div class="container">
-  <div class="row mt-5">
-    <div class="col-lg-6">
-      <div class="card">
-        <div class="card-header">
-          <h3>Profile</h3>
-        </div>
-        <div class="card-body">
-          <p class="username"><strong>Name</strong>: <%= user.userName %></p>
-          <p><strong>Email</strong>: <%= user.email %></p>
-          <% if (isCurrentUser) { %>
-            <a href="/logout" class="btn btn-primary">Log Out</a>
-          <% } %>
-        </div>
-      </div>
-      <% if (isCurrentUser) { %>
-        <div class="card mt-5">
+<div class="container-general">
+  <main>
+    <div class="row justify-content-center align-center profile-container">
+      <div class="col-lg-6 col-md-9 col-sm-10 px-4 mb-5 content-container">
+        <div class="card">
           <div class="card-header">
-            <h3>Create a Post</h3>
+            <h3 class="card-title text-center mb-3">Profile</h3>
+          </div>
+          <div class="card-body text-center">
+            <p class="username"><strong>Name</strong>: <span class="profile-p-span"><%= user.userName %></span></p>
+            <p><strong>Email</strong>: <span class="profile-p-span"><%= user.email %></span></p>
+            <% if (isCurrentUser) { %>
+              <button type="submit" class="btn w-50 mt-4 mb-2 btn-new"><a href="/logout" class="profile-log-out">Log Out</a></button>
+            <% } %>
+          </div>
+        </div>
+        <% if (isCurrentUser) { %>
+          <div class="card mt-5">
+            <div class="card-header">
+              <h3 class="card-title text-center mb-3">Create a Post</h3>
+            </div>
+            <div class="card-body">
+              <!-- Conditionally render the error message if it exists -->
+              <% if (flash.error) { %>
+                <p class="text-danger"><%= flash.error %></p>
+              <% } %>
+  
+              <form action="/post/createPost" enctype="multipart/form-data" method="POST">
+                <div class="mb-3">
+                  <label for="title" class="form-label">Title</label>
+                  <input type="text" class="form-control" id="title" placeholder="Title" name="title">
+                </div>
+                <div class="mb-3">
+                  <label for="caption" class="form-label">Caption</label>
+                  <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="songName" class="form-label">Song Name</label>
+                  <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control" spellcheck="true">
+                </div>
+                <div class="mb-3">
+                  <label for="artistName" class="form-label">Artist Name</label>
+                  <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control" spellcheck="true">
+                </div>
+                <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn w-50 mt-4 mb-2 btn-new" value="Upload">Create</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        <% } %>
+      </div>
+
+      <div class="col-lg-6 col-md-9 col-sm-10 px-4 mb-5 content-container">
+        <div class="card mb-4 text-center">
+          <div class="card-header">
+            <h4 class="card-title">Recent Posts</h4>
           </div>
           <div class="card-body">
-            <!-- Conditionally render the error message if it exists -->
-            <% if (flash.error) { %>
-              <p class="text-danger"><%= flash.error %></p>
-            <% } %>
-    
-            <form action="/post/createPost" enctype="multipart/form-data" method="POST">
-              <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" placeholder="Title" name="title">
-              </div>
-              <div class="mb-3">
-                <label for="caption" class="form-label">Caption</label>
-                <textarea class="form-control" id="caption" placeholder="Caption" name="caption"></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="songName" class="form-label">Song Name</label>
-                <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control" spellcheck="true">
-              </div>
-              <div class="mb-3">
-                <label for="artistName" class="form-label">Artist Name</label>
-                <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control" spellcheck="true">
-              </div>
-              <button type="submit" class="btn btn-primary" value="Upload">Create</button>
-            </form>
+            <ul class="list-unstyled">
+              <% posts.forEach(function(post, index) { %>
+                <li class="mb-4">
+                  <!-- <a href="/post/<%= post._id %>">
+                    <h2><%= post.title %></h2>
+                  </a> -->
+                  <!-- <p><%= post.caption %></p> -->
+                  <% if(post.spotifyTrackId) { %>
+                    <div class="iframe-container px-3 py-4">
+                      <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="90%" height="304" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+                      <div class="d-flex justify-content-center">
+                        <button class="btn btn-new profile-btn-visit">
+                          <span class="d-flex justify-content-between w-100">
+                            <span class="text-center flex-fill gotopost"><a class="profile-visit" href="/post/<%= post._id %>">View Post</a></span>
+                            <span class="ml-3 arrowh"><i class="fa-solid fa-share"></i></span>
+                          </span>
+                        </button>
+                      </div>
+                    </div>                   
+                  <% } %>
+                </li>
+                <% if(index === 2 && posts.length > 2) { %>
+                    <a class="btn w-50 btn-new" href="/profile/<%=user._id%>/userfeed">See More Posts</a>
+                <% } %>
+              <% }); %>
+            </ul>
           </div>
         </div>
-      <% } %>
-    </div>
-
-    <div class="col-lg-6">
-      <div class="card mb-4">
-        <h5 class="card-header">Recent Posts</h5>
-        <div class="card-body">
-          <ul class="list-unstyled">
-            <% posts.forEach(function(post, index) { %>
-              <li class="mb-4">
-                <a href="/post/<%= post._id %>">
-                  <h2><%= post.title %></h2>
-                </a>
-                <p><%= post.caption %></p>
-                <% if(post.spotifyTrackId) { %>
-                  <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="100%" height="380" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                <% } %>
-              </li>
-              <% if(index === 2 && posts.length > 2) { %>
-                <li class="mb-4">
-                  <a class="btn btn-primary" href="/profile/<%=user._id%>/userfeed">See More Posts</a>
-                </li>
-              <% } %>
-            <% }); %>
-          </ul>
+        <div class="btn-group d-flex">
+          <a class="btn w-100 btn-new" href="/feed">Feed</a>
         </div>
       </div>
-      <div class="btn-group d-flex" role="group">
-        <a class="btn btn-primary w-100" href="/feed">Feed</a>
-      </div>
     </div>
-  </div>
+  </main>
 </div>
 <%- include('partials/footer') -%>

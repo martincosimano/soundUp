@@ -1,5 +1,5 @@
 :root {
-  --clr-background-header: #000000;
+  --clr-background-header: #0c0c0c;
   --clr-background-primary: #080808 ;
   --clr-background-secondary: #101010;
   --clr-background-tertiary: #1e1e1e;
@@ -7,8 +7,8 @@
 
   --clr-font-pdark: #000000;
   --clr-font-plight: #ffffff;
+  --clr-font-primary: #cbcbcb;
   --clr-font-secondary: #6622d4;
-  --clr-font-tertiary: #cbcbcb;
   --clr-font-extras: #6c757d;
 
   --fs-xl: 2.25rem; 
@@ -39,26 +39,32 @@ html {
 }
 body {
   background-color: var(--clr-background-primary);
+  color: var(--clr-font-plight);
 }
 a {
   text-decoration: none;
-  /* color:var(--clr-font-secondary); */
 }
-/* a:hover {
-  color: var(--clr-font-secondary);
+a:hover {
+  /* color: var(--clr-font-secondary); */
   opacity: 0.9;
-} */
+}
 .card {
   background-color: var(--clr-background-secondary);
+  box-shadow: 0px 0px 0px 1px var(--clr-background-tertiary);
 }
-input {
+input,
+textarea {
   color: var(--clr-font-extras) !important;
   background-color: var(--clr-background-tertiary) !important;
   border-color: var(--clr-background-border) !important;
 }
 input:focus,
-.btn:focus {
+.btn:focus,
+textarea:focus {
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(0, 0, 0, 0.6) !important;
+}
+.card-header {
+  background-color: var(--clr-background-secondary);
 }
 
 /* Index */
@@ -79,7 +85,7 @@ input:focus,
   color: var(--clr-font-pdark);
 }
 .index-p {
-  color: var(--clr-font-tertiary);
+  color: var(--clr-font-primary);
   font-family: var(--ff-primary);
   font-size: var(--fs-600);
   font-weight: lighter;
@@ -108,7 +114,7 @@ h1,
   text-transform: uppercase;
 }
 
-/* Log In */
+/* Log In & Register */
 .login-log-in,
 h3,
 label,
@@ -118,6 +124,24 @@ label,
 .login-register {
   color: var(--clr-font-secondary);
 }
+
+/* Profile */
+.profile-log-out,
+.profile-visit {
+  color: var(--clr-font-plight);
+}
+.profile-log-out:hover,
+.profile-visit:hover {
+  color: var(--clr-font-plight);
+}
+.username {
+  text-transform: capitalize;
+}
+.profile-p-span {
+  color: var(--clr-font-primary);
+}
+
+
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -160,10 +184,20 @@ main {
   --bs-gutter-x: 0rem !important;
 }
 
+/* Profile */
+.profile-btn-visit {
+  width: 30%;
+}
+
+
 /******************************************
 /* ADDITIONAL STYLES
 /*******************************************/
 /* General */
+.btn-new {
+  background-color: var(--clr-font-secondary);
+  color: var(--clr-font-plight);
+}
 .btn-new:hover {
   background-color: var(--clr-font-secondary);
   opacity: 0.9;
@@ -200,11 +234,14 @@ main {
   100%{background-color: white; color: black;}
 }
 
-/* Log In */
+/* Log In & Register */
 .login-log-in {
   background-color: var(--clr-font-secondary);
   border-color: var(--clr-font-secondary);
 }
+
+/* Profile */
+
 
 /******************************************
 /* MEDIA QUERY
@@ -246,7 +283,6 @@ main {
 .index-img-container {
   display: none;
 }
-
 .index-log-box {
   flex-direction: row !important;
   margin-inline: 0 !important;
@@ -275,6 +311,7 @@ main {
   align-items: center !important;
   padding-bottom: 0rem;
 }
+
 
 }
 
@@ -309,9 +346,6 @@ li {
   list-style: none;
 }
 
-.username {
-  text-transform: capitalize;
-}
   
 .container {
   text-align: center;

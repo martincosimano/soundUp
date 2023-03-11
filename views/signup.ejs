@@ -2,7 +2,7 @@
 <div class="container-general">
     <main>
         <div class="row justify-content-center align-center">
-            <div class="col-lg-6 col-md-8 col-sm-10 content-container">
+            <div class="col-lg-6 col-md-9 col-sm-10 px-4 content-container">
                 <% if (locals.messages.errors) { %>
                     <% messages.errors.forEach( el => { %>
                         <div class="alert alert-danger"><%= el.msg %></div>
@@ -14,8 +14,10 @@
                     <% }) %>
                 <% } %>
                 <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title text-center mb-3">Create an Account</h3>
+                    </div>
                     <div class="card-body">
-                        <h3 class="card-title text-center mb-4">Create an Account</h3>
                         <form action="/signup" method="POST">
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Name</label>
@@ -34,7 +36,7 @@
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" id="confirmPassword" placeholder="Password" name="confirmPassword">
                             </div>
-                            <button type="submit" class="btn w-100 mt-4 login-log-in btn-new">Sign Up</button>
+                            <button type="submit" class="btn w-100 mt-4 mb-2 login-log-in btn-new">Sign Up</button>
                         </form>
                     </div>
                 </div>
