@@ -68,21 +68,16 @@ textarea:focus {
 }
 
 /* Header */
-.navbar-logout {
-  color: var(--clr-font-secondary) !important;
-  margin-inline: 2rem;
-}
 .navbar-user,
-.navbar-home {
+.navbar-feed,
+.navbar-logout {
   color: var(--clr-font-plight) !important;
 }
-.navbar-logout:hover,
-.navbar-home:hover {
-  color: var(--clr-font-plight) !important;
+.navbar-user:hover,
+.navbar-feed:hover,
+.navbar-logout:hover {
+  color: var(--clr-font-secondary) !important;
   opacity: 0.9;
-}
-.navbar-logo {
-  padding-left: 2rem;
 }
 
 
@@ -185,6 +180,16 @@ main {
   padding-block: 2rem;
 }
 
+/* Header */
+.navbar-expand,
+.navbar-nav,
+.nav-link {
+  padding-right: 0rem !important;
+}
+.navbar-logout {
+  padding-right: 0.5rem !important;
+}
+
 /* Index */
 .index-log-box {
   margin-top: 6rem;
@@ -240,9 +245,6 @@ main {
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: 0.2rem;
-}
-.login-span {
-    flex-grow: 1;
 }
 
 .animation-fc {
@@ -342,9 +344,6 @@ main {
   padding-inline: 2rem;
   padding-block: 0.5rem;
   font-size: var(--fs-300);
-}
-.index-arrow {
-  padding-left: 1rem;
 }
 .index-p {
   width: 80%;
