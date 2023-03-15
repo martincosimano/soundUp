@@ -62,8 +62,8 @@ module.exports = {
         const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();
         const relatedPosts = await Post.find({
             $or: [
+              { artistName: post.artistName },
                 { songName: post.songName },
-                { artistName: post.artistName },
             ],
         }).sort({ createdAt: "desc" }).limit(3);
 
@@ -98,12 +98,10 @@ module.exports = {
   },
   createPost: async (req, res) => {
     try {
-        const { songName, artistName, title, caption } = req.body;
+        const { songName, artistName, caption } = req.body;
 
         // Check if the required fields are filled in
-        if (!title) {
-            throw new Error('Title is required');
-        }else if(!caption) {
+        if(!caption) {
           throw new Error('Caption is required')
         }else if(!songName) {
           throw new Error('Song name is required')
@@ -119,7 +117,6 @@ module.exports = {
         }
 
         const post = await Post.create({
-            title,
             caption,
             likes: 0,
             songName,

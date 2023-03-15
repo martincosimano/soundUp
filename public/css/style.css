@@ -38,6 +38,7 @@ html {
   scroll-behavior: smooth;
 }
 body {
+  font-family: var(--ff-primary);
   background-color: var(--clr-background-primary);
   color: var(--clr-font-plight);
 }
@@ -68,6 +69,9 @@ textarea:focus {
 }
 
 /* Header */
+.header-nav {
+  background-color: #212529 !important;
+}
 .navbar-user,
 .navbar-feed,
 .navbar-logout {
@@ -79,7 +83,6 @@ textarea:focus {
   color: var(--clr-font-secondary) !important;
   opacity: 0.9;
 }
-
 
 /* Index */
 .index-log-container {
@@ -185,9 +188,6 @@ main {
 .navbar-nav,
 .nav-link {
   padding-right: 0rem !important;
-}
-.navbar-logout {
-  padding-right: 0.5rem !important;
 }
 
 /* Index */

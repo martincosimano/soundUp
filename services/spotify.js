@@ -25,7 +25,7 @@ const searchTrack = async (songName, artistName, token) => {
             Authorization: 'Bearer ' + token,
         },
         params: {
-            q: `track:${songName} artist:${artistName}`,
+            q: `${songName} ${artistName}`,
             type: 'track',
             limit: 1,
         },
