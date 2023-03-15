@@ -9,18 +9,19 @@ const getApiToken = async () => {
     const credentials = `${clientId}:${clientSecret}`;
     const encodedCredentials = Buffer.from(credentials).toString('base64');
   
-    const result = await fetch('https://accounts.spotify.com/api/token', {
+    const response = await axios({
       method: 'POST',
+      url: 'https://accounts.spotify.com/api/token',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
         'Authorization': `Basic ${encodedCredentials}`
       },
-      body: 'grant_type=client_credentials'
+      data: 'grant_type=client_credentials'
     });
   
-    const token = await result.json();
-    return token.access_token;
-  }
+    const token = response.data.access_token;
+    return token;
+}
 
 const searchTrack = async (songName, artistName, token) => {
     const response = await axios.get('https://api.spotify.com/v1/search', {
