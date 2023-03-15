@@ -25,8 +25,6 @@ Tech used: HTML, CSS, EJS, Bootstrap, JavaScript, NodeJS, Express, MongoDB, Mong
 
 - Create a `.env` file in config folder and add the following as `key = value`
   - PORT = 8888 (can be any port example: 3000)
-  - API_KEY = `your cloudinary api key`
-  - API_SECRET = `your cloudinary api secret`
   - CLIENT_ID = `your spotify client ID`
   - CLIENT_SECRET = `your spotify client secret`
 
