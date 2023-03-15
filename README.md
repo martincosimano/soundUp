@@ -24,7 +24,7 @@ Tech used: HTML, CSS, EJS, Bootstrap, JavaScript, NodeJS, Express, MongoDB, Mong
 # Setting it up
 
 - Create a `.env` file in config folder and add the following as `key = value`
-  - PORT = 8888 (can be any port example: 3000)
+  - PORT = `8888` (can be any port example: 3000)
   - CLIENT_ID = `your spotify client ID`
   - CLIENT_SECRET = `your spotify client secret`
 
