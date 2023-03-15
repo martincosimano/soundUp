@@ -5,17 +5,22 @@ const axios = require('axios');
 const getApiToken = async () => {
     const clientId = process.env.CLIENT_ID;
     const clientSecret = process.env.CLIENT_SECRET;
-
-    const response = await axios.post('https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
-        headers: {
-            'Content-Type' : 'application/x-www-form-urlencoded', 
-            'Authorization' : 'Basic ' + btoa( clientId + ':' + clientSecret)
-        },
+  
+    const credentials = `${clientId}:${clientSecret}`;
+    const encodedCredentials = Buffer.from(credentials).toString('base64');
+  
+    const result = await fetch('https://accounts.spotify.com/api/token', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${encodedCredentials}`
+      },
+      body: 'grant_type=client_credentials'
     });
-
-    const token = response.data.access_token;
-    return token;
-}
+  
+    const token = await result.json();
+    return token.access_token;
+  }
 
 const searchTrack = async (songName, artistName, token) => {
     const response = await axios.get('https://api.spotify.com/v1/search', {
