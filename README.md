@@ -10,7 +10,7 @@ Whether you're a music lover looking to share your latest discovery or someone w
 
 
 
-Tech used: HTML, CSS, EJS, JavaScript, NodeJS, Express, MongoDB, Mongoose.
+Tech used: HTML, CSS, EJS, Bootstrap, JavaScript, NodeJS, Express, MongoDB, Mongoose.
 
 
 
