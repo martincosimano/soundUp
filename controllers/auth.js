@@ -92,21 +92,6 @@ exports.postSignup = (req, res, next) => {
     password: req.body.password,
   });
 
-  // Clear form data from session
-  delete req.session.signupFormData;
-
-  user.save((err) => {
-    if (err) {
-      return next(err);
-    }
-    req.logIn(user, (err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect(`/profile/${req.user._id}`);
-    });
-  });
-
   User.findOne(
     { $or: [{ email: req.body.email }, { userName: req.body.userName }] },
     (err, existingUser) => {
