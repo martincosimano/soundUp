@@ -4,16 +4,6 @@
     <main>
         <div class="row justify-content-center align-center">
             <div class="col-lg-6 col-md-9 col-sm-10 px-4 content-container">
-                <% if (locals.messages.errors) { %>
-                    <% messages.errors.forEach( el => { %>
-                        <div class="alert alert-danger"><%= el.msg %></div>
-                    <% }) %>
-                <% } %>
-                <% if (locals.messages.info) { %>
-                    <% messages.info.forEach( el => { %>
-                        <div class="alert alert-info"><%= el.msg %></div>
-                    <% }) %>
-                <% } %>
                 <div class="card">
                     <div class="card-header">
                         <h3 class="card-title text-center mb-3">Create an Account</h3>
@@ -41,6 +31,16 @@
                         </form>
                     </div>
                 </div>
+                <% if (locals.messages.errors) { %>
+                    <% messages.errors.forEach( el => { %>
+                        <div class="alert alert-danger"><%= el.msg %></div>
+                    <% }) %>
+                <% } %>
+                <% if (locals.messages.info) { %>
+                    <% messages.info.forEach( el => { %>
+                        <div class="alert alert-info"><%= el.msg %></div>
+                    <% }) %>
+                <% } %>
               </div>
         </div>
     </main>
