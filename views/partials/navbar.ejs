@@ -1,13 +1,15 @@
 <header class="header-nav px-3">
   <nav class="navbar navbar-expand navbar-dark bg-dark">
       <img class="navbar-logo" src="/imgs/favicon-32x32.png">
-    <div class="navbar-collapse justify-content-between">
-      <ul class="navbar-nav mx-auto">
+    <div class="navbar-collapse d-flex justify-content-center">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link navbar-feed animation-fc" href="/feed">Feed</a>
         </li>
       </ul>
-      <ul class="navbar-nav ml-auto">
+    </div>
+    <div class="d-flex justify-content-end">
+      <ul class="navbar-nav">
         <li class="nav-item">
           <a class="nav-link navbar-user" href="/profile/<%=currentUserID%>"><i class="nav-link navbar-user fa-regular fa-user"></i></a>
         </li>
