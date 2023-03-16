@@ -24,6 +24,10 @@ const CommentSchema = new mongoose.Schema({
     userName: {
         type: String,
         ref: "User",
+    },
+    status: {
+        type: Boolean,
+        defalt: true,
     }
 });
 

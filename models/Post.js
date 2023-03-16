@@ -40,7 +40,11 @@ const postSchema = new mongoose.Schema({
   likedBy: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-  }]
+  }],
+  status: {
+    type: Boolean,
+    default: true,
+  }
 });
 
 //MongoDB Collection named here - will give lowercase plural of name 

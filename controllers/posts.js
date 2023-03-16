@@ -11,7 +11,7 @@ module.exports = {
     try {
       const user = await User.findById(req.params.id);
       const limit = 3;
-      const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).limit(limit).lean();
+      const posts = await Post.find({ user: req.params.id, status: true }).sort({ createdAt: "desc" }).limit(limit).lean();
   
       // Check if the authenticated user is viewing their own profile
       const isCurrentUser = req.user && req.user._id.toString() === req.params.id;
@@ -45,8 +45,8 @@ module.exports = {
   try {
     const perPage = 9;
     const page = Math.max(0, req.query.page - 1);
-    const count = await Post.countDocuments();
-    const posts = await Post.find()
+    const count = await Post.countDocuments( { status: true });
+    const posts = await Post.find( { status: true })
       .sort({ createdAt: "desc" })
       .skip(perPage * page)
       .limit(perPage)
@@ -64,44 +64,50 @@ module.exports = {
     console.log(err);
   }
 },
-  getPost: async (req, res) => {
-    try {
-        const post = await Post.findById(req.params.id);
-        const comments = await Comment.find({ post: req.params.id }).sort({ createdAt: "desc" }).lean();
-        const relatedPosts = await Post.find({
-            $or: [
-              { artistName: post.artistName },
-                { songName: post.songName },
-            ],
-        }).sort({ createdAt: "desc" }).limit(3);
+getPost: async (req, res) => {
+  try {
+      const post = await Post.findById(req.params.id);
 
-        // Calculate the time since the post was created
-        const timeSincePost = moment(post.createdAt).fromNow();
+      // check if the post exists and is not deleted
+      if (!post || !post.status) {
+        return res.status(404).send("Post not found");
+      }
 
-        // Calculate the time since each comment was created
-        const commentsWithTimeSince = comments.map((comment) => {
-            const timeSinceComment = moment(comment.createdAt).fromNow();
-            return { ...comment, timeSinceComment };
-        });
+      const comments = await Comment.find({ post: req.params.id, status: true }).sort({ createdAt: "desc" }).lean();
+      const relatedPosts = await Post.find({
+          $or: [
+            { artistName: post.artistName, status: true },
+            { songName: post.songName, status: true },
+          ],
+      }).sort({ createdAt: "desc" }).limit(3);
 
-        res.render("post.ejs", {
-            post: post,
-            user: req.user,
-            relatedPosts: relatedPosts,
-            comments: commentsWithTimeSince,
-            currentUserID: req.user ? req.user._id : null,
-            timeSincePost: timeSincePost
-        });
-    } catch (err) {
-        console.log(err);
-    }
+      // Calculate the time since the post was created
+      const timeSincePost = moment(post.createdAt).fromNow();
+
+      // Calculate the time since each comment was created
+      const commentsWithTimeSince = comments.map((comment) => {
+          const timeSinceComment = moment(comment.createdAt).fromNow();
+          return { ...comment, timeSinceComment };
+      });
+
+      res.render("post.ejs", {
+          post: post,
+          user: req.user,
+          relatedPosts: relatedPosts,
+          comments: commentsWithTimeSince,
+          currentUserID: req.user ? req.user._id : null,
+          timeSincePost: timeSincePost
+      });
+  } catch (err) {
+      console.log(err);
+  }
 },
   getUserFeed: async (req, res) => {
     try {
       const perPage = 9;
       const page = Math.max(0, req.query.page - 1);
-      const count = await Post.countDocuments( { user: req.params.id } );
-      const posts = await Post.find( { user: req.params.id } )
+      const count = await Post.countDocuments( { user: req.params.id, status: true } );
+      const posts = await Post.find( { user: req.params.id, status: true } )
         .sort({ createdAt: "desc" })
         .skip(perPage * page)
         .limit(perPage)
@@ -148,6 +154,7 @@ module.exports = {
             user: req.user?.id,
             userName: req.user?.userName,
             email: req.user?.email,
+            status: true
         });
 
         console.log('Post has been added!');
@@ -195,7 +202,8 @@ likePost: async (req, res) => {
   deletePost: async (req, res) => {
     try {
       let post = await Post.findById({ _id: req.params.id });
-      await Post.remove({ _id: req.params.id });
+      post.status = false;
+      await post.save();
       console.log("Deleted Post");
       res.redirect(`/profile/${req.user._id}`);
     } catch (err) {

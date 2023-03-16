@@ -6,14 +6,8 @@ const { ensureAuth } = require("../middleware/auth");
 
 //Post Routes
 router.get("/:id", ensureAuth, postsController.getPost);
-
-//Enables user to create post w/ cloudinary for media uploads
-router.post("/createPost", upload.single("file"), postsController.createPost);
-
-//Enables user to like post. In controller, uses POST model to update likes by 1
-router.put("/likePost/:id", postsController.likePost);
-
-//Enables user to delete post. In controller, uses POST model to delete post from MongoDB collection
-router.delete("/deletePost/:id", postsController.deletePost);
+router.post("/createPost", ensureAuth, upload.single("file"), postsController.createPost);
+router.put("/likePost/:id", ensureAuth, postsController.likePost);
+router.delete("/deletePost/:id", ensureAuth, postsController.deletePost);
 
 module.exports = router;
