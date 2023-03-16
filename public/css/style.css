@@ -160,7 +160,10 @@ label,
 .feed-username {
   color: var(--clr-font-plight);
 }
-
+.pagination li a{
+  background-color: #212529 !important;
+  border: none !important;
+}
 /******************************************
 /* LAYOUT
 /*******************************************/

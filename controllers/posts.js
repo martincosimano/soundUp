@@ -42,20 +42,28 @@ module.exports = {
     }
   },
   getFeed: async (req, res) => {
-    try {
-      const post = await Post.findById(req.params.id);
-      const posts = await Post.find().sort({ createdAt: "desc" }).lean();
-      res.render("feed.ejs", { 
-        post: post,
-        posts: posts, 
-        user: req.user, 
-        currentUserID: req.user ? req.user._id : null,
-        userName: req.user?.userName,
-       });
-    } catch (err) {
-      console.log(err);
-    }
-  },
+  try {
+    const perPage = 9;
+    const page = Math.max(0, req.query.page - 1);
+    const count = await Post.countDocuments();
+    const posts = await Post.find()
+      .sort({ createdAt: "desc" })
+      .skip(perPage * page)
+      .limit(perPage)
+      .lean();
+
+    res.render("feed.ejs", { 
+      posts: posts, 
+      user: req.user, 
+      currentUserID: req.user ? req.user._id : null,
+      userName: req.user?.userName,
+      pageCount: Math.ceil(count / perPage),
+      currentPage: page + 1,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+},
   getPost: async (req, res) => {
     try {
         const post = await Post.findById(req.params.id);
@@ -90,8 +98,23 @@ module.exports = {
 },
   getUserFeed: async (req, res) => {
     try {
-      const posts = await Post.find({ user: req.params.id }).sort({ createdAt: "desc" }).lean();
-      res.render('profile/userfeed.ejs', { posts: posts, user: req.user, currentUserID: req.user ? req.user._id : null });
+      const perPage = 9;
+      const page = Math.max(0, req.query.page - 1);
+      const count = await Post.countDocuments( { user: req.params.id } );
+      const posts = await Post.find( { user: req.params.id } )
+        .sort({ createdAt: "desc" })
+        .skip(perPage * page)
+        .limit(perPage)
+        .lean();
+  
+      res.render("feed.ejs", { 
+        posts: posts, 
+        user: req.user, 
+        currentUserID: req.user ? req.user._id : null,
+        userName: req.user?.userName,
+        pageCount: Math.ceil(count / perPage),
+        currentPage: page + 1,
+      });
     } catch (err) {
       console.log(err);
     }
