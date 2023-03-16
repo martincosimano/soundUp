@@ -73,12 +73,10 @@ textarea:focus {
   background-color: #212529 !important;
 }
 .navbar-user,
-.navbar-feed,
 .navbar-logout {
   color: var(--clr-font-plight) !important;
 }
 .navbar-user:hover,
-.navbar-feed:hover,
 .navbar-logout:hover {
   color: var(--clr-font-secondary) !important;
   opacity: 0.9;
