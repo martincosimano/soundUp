@@ -2,9 +2,9 @@
 
 Sound UP is a full-stack social network application designed for music enthusiasts who want to share their favorite songs with others. The app allows users to create a profile, make posts, and share songs with other users. The songs are grabbed from the Spotify API, ensuring that users have access to a vast selection of music to share with others.
 
-Using HTML, EJS, CSS, Javascript, Node, Express, MongoDB, and Mongoose, SoundUp provides a seamless and user-friendly experience. Users can easily navigate through the app, make posts, and interact with other users' posts by liking or commenting on them.
+Using HTML, EJS, CSS, Javascript, Node, Express, MongoDB, and Mongoose, Sound UP provides a seamless and user-friendly experience. Users can easily navigate through the app, make posts, and interact with other users' posts by liking or commenting on them.
 
-Whether you're a music lover looking to share your latest discovery or someone who wants to discover new songs, SoundUp is the perfect app for you. With its simple yet powerful features, it makes sharing and discovering music more fun and exciting than ever before.
+Whether you're a music lover looking to share your latest discovery or someone who wants to discover new songs, Sound UP is the perfect app for you. With its simple yet powerful features, it makes sharing and discovering music more fun and exciting than ever before.
 
 ![image](https://user-images.githubusercontent.com/103332504/225462588-360bf3cd-1e37-4f9e-a033-e64ab08ee33b.png)
 
