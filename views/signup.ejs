@@ -12,20 +12,20 @@
                         <form action="/signup" method="POST">
                             <div class="mb-3">
                                 <label for="userName" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="userName" placeholder="Name" name="userName">
+                                <input type="text" class="form-control" id="userName" placeholder="Name" name="userName" value="<%= formData.userName || '' %>">
                             </div>
                             <div class="mb-3">
                               <label for="exampleInputEmail1" class="form-label">Email address</label>
-                              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" name="email">
+                              <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" name="email" value="<%= formData.email || '' %>">
                               <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
                             </div>
                             <div class="mb-3">
                               <label for="password" class="form-label">Password</label>
-                              <input type="password" class="form-control" id="password" placeholder="Password" name="password">
+                              <input type="password" class="form-control" id="password" placeholder="Password" name="password" value="<%= formData.password || '' %>">
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" id="confirmPassword" placeholder="Password" name="confirmPassword">
+                                <input type="password" class="form-control" id="confirmPassword" placeholder="Password" name="confirmPassword" value="<%= formData.confirmPassword || '' %>">
                             </div>
                             <button type="submit" class="btn w-100 mt-4 mb-2 login-log-in btn-new">Sign Up</button>
                         </form>

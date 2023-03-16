@@ -58,7 +58,11 @@ exports.getSignup = (req, res) => {
   if (req.user) {
     return res.redirect(`/profile/${req.user._id}`);
   }
-  res.render("signup", { title: "Create Account", user: req.user });
+
+  // Retrieve form data from session
+  const formData = req.session.signupFormData || {};
+
+  res.render("signup", { title: "Create Account", user: req.user, formData });
 };
 
 exports.postSignup = (req, res, next) => {
@@ -73,6 +77,8 @@ exports.postSignup = (req, res, next) => {
     validationErrors.push({ msg: "Passwords do not match" });
 
   if (validationErrors.length) {
+    // Store form data in session
+    req.session.signupFormData = req.body;
     req.flash("errors", validationErrors);
     return res.redirect("../signup");
   }
@@ -84,6 +90,21 @@ exports.postSignup = (req, res, next) => {
     userName: req.body.userName,
     email: req.body.email,
     password: req.body.password,
+  });
+
+  // Clear form data from session
+  delete req.session.signupFormData;
+
+  user.save((err) => {
+    if (err) {
+      return next(err);
+    }
+    req.logIn(user, (err) => {
+      if (err) {
+        return next(err);
+      }
+      res.redirect(`/profile/${req.user._id}`);
+    });
   });
 
   User.findOne(
