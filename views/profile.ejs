@@ -30,7 +30,7 @@
               <form action="/post/createPost" enctype="multipart/form-data" method="POST">
                 <div class="mb-3">
                   <label for="caption" class="form-label">Caption</label>
-                  <textarea class="form-control" id="caption" placeholder="Say something" name="caption"></textarea>
+                  <textarea class="form-control" id="caption" placeholder="Write something" name="caption"></textarea>
                 </div>
                 <div class="mb-3">
                   <label for="artistName" class="form-label">Artist Name</label>
@@ -66,7 +66,7 @@
                     <div class="iframe-container px-3 py-4">
                       <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="90%" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
                       <div class="d-flex justify-content-center">
-                        <button class="btn btn-new profile-btn-visit">
+                        <button class="btn btn-new">
                             <a class="post-visit" href="/post/<%= post._id %>">View Post</a>
                         </button>
                       </div>
