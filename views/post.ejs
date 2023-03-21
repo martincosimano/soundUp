@@ -77,18 +77,6 @@
               <a href="/profile/<%=post.user%>" class="btn btn-new">Go to User Profile</a>
           </div>
         </div>
-        <div class="card mt-4">
-          <div class="card-body">
-            <h5 class="card-title">Related Posts</h5>
-            <% for(var i=0; i<relatedPosts.length; i++){ %>
-              <% if (relatedPosts[i]._id.toString() !== post._id.toString()) { %>
-                <div class="mb-3">
-                  <a href="/post/<%= relatedPosts[i].id %>" class="relatedposts"><%= relatedPosts[i].songName %></a>
-                </div>
-              <% } %>
-            <% } %>
-          </div>
-        </div>
       </div>
     </div>
   </main>

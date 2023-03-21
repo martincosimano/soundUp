@@ -82,6 +82,10 @@ textarea:focus {
   opacity: 0.9;
 }
 
+.navbar-feed {
+  font-size: var(--fs-600);
+}
+
 /* Index */
 .index-log-container {
   background-image: url("../imgs/mobileLeft.jpg");
@@ -189,6 +193,15 @@ main {
 .navbar-nav,
 .nav-link {
   padding-right: 0rem !important;
+}
+
+.navbar-user {
+  padding-left: 0rem !important;
+}
+
+.navbar-feed {
+  padding-left: 2rem !important;
+  padding-right: 1rem !important;
 }
 
 /* Index */

@@ -74,12 +74,6 @@ getPost: async (req, res) => {
       }
 
       const comments = await Comment.find({ post: req.params.id, status: true }).sort({ createdAt: "desc" }).lean();
-      const relatedPosts = await Post.find({
-          $or: [
-            { artistName: post.artistName, status: true },
-            { songName: post.songName, status: true },
-          ],
-      }).sort({ createdAt: "desc" }).limit(3);
 
       // Calculate the time since the post was created
       const timeSincePost = moment(post.createdAt).fromNow();
@@ -93,7 +87,6 @@ getPost: async (req, res) => {
       res.render("post.ejs", {
           post: post,
           user: req.user,
-          relatedPosts: relatedPosts,
           comments: commentsWithTimeSince,
           currentUserID: req.user ? req.user._id : null,
           timeSincePost: timeSincePost
