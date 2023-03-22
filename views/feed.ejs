@@ -1,5 +1,5 @@
 <%- include('partials/header') -%>
-<%- include('partials/navbar') -%>
+<%- include('partials/navbar', { activePage: 'home' }) -%>
 <div class="container-general">
   <main>
     <div class="row justify-content-center align-center feed-container">
@@ -7,7 +7,7 @@
           <div class="col-lg-4 col-md-6 col-sm-10 px-4 mb-3 content-container">
             <div class="card">
               <div class="card-body text-center">
-                <p>Shared by:</p>
+                <p>Created by:</p>
                 <a href="/profile/<%= posts[i].user._id%>" class="feed-username">
                   <p class="username"><%= posts[i].userName %></p>
                 </a>

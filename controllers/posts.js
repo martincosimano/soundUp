@@ -3,6 +3,7 @@ const Comment = require("../models/Comment");
 const { getApiToken, searchTrack } = require("../services/spotify");
 const User = require("../models/User");
 const moment = require('moment');
+const nodemon = require("nodemon");
 
 
 // Post controller functions
@@ -58,7 +59,7 @@ module.exports = {
       currentUserID: req.user ? req.user._id : null,
       userName: req.user?.userName,
       pageCount: Math.ceil(count / perPage),
-      currentPage: page + 1,
+      currentPage: page + 1
     });
   } catch (err) {
     console.log(err);
@@ -106,7 +107,7 @@ getPost: async (req, res) => {
         .limit(perPage)
         .lean();
   
-      res.render("feed.ejs", { 
+      res.render("profile/userfeed.ejs", { 
         posts: posts, 
         user: req.user, 
         currentUserID: req.user ? req.user._id : null,

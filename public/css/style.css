@@ -79,6 +79,12 @@ Header {
   border-color: var(--clr-font-secondary) !important;
   color: var(--clr-font-plight) !important;
 }
+.nav-link {
+  color: var(--clr-font-plight) !important;
+}
+.nav-link.active {
+  color: var(--clr-font-secondary) !important;
+}
 
 /* Index */
 .index-log-container {
@@ -311,6 +317,11 @@ main {
   font-size: var(--fs-500);
  }
 
+ /* Navbar */
+ .nav-link.active {
+  border-bottom: 2px solid var(--clr-font-secondary);
+}
+
 /******************************************
 /* LAYOUT
 /*******************************************/
@@ -326,6 +337,9 @@ main {
 }
 .navbar-home-ul {
   margin-top: 0rem !important;
+}
+.nav-user {
+  gap: 7rem !important;
 }
 
 /* Index */
