@@ -7,30 +7,32 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="navbar-collapse collapse" id="navbarNav">
-      <form class="d-flex search-form" action="/search" method="GET">
-        <div class="input-group">
-          <input class="form-control" type="search" name="q" placeholder="Search for users" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
-        </div>
-      </form>
+      <div class="d-flex justify-content-center">
+        <form class="d-flex search-form col-md-3 col-sm-7 col-9" action="/search" method="GET">
+          <div class="input-group">
+            <input class="form-control" type="search" name="q" placeholder="Search for users" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+          </div>
+        </form>
+      </div>
       <ul class="navbar-nav ms-auto mb-lg-0 navbar-home-ul">
         <li class="nav-item">
-          <a class="nav-link <%= activePage === 'home' ? 'active' : '' %>" href="/feed"><i class="fa-solid fa-house"></i> Home</a>
+          <a class="nav-link text-center <%= activePage === 'home' ? 'active' : '' %>" href="/feed"><i class="fa-solid fa-house"></i> Home</a>
         </li>
       </ul>      
       <ul class="navbar-nav ms-auto nav-user">
         <li class="nav-item">
-          <a class="nav-link <%= activePage === 'profile' ? 'active' : '' %>" href="/profile/<%=currentUserID%>"><i class="fa-regular fa-user"></i> Profile</a>
+          <a class="nav-link text-center <%= activePage === 'profile' ? 'active' : '' %>" href="/profile/<%=currentUserID%>"><i class="fa-regular fa-user"></i> Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+          <a class="nav-link text-center" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
         </li>
       </ul>
     </div>
   </nav>
 </header>
 <% if (messages.error) { %>
-  <div class="alert alert-danger searchUser-error" role="alert">
+  <div class="alert alert-danger searchUser-error nav-search-error" role="alert">
     <%= messages.error %>
   </div>
 <% } %>

@@ -194,6 +194,9 @@ main {
 .searchUser-error {
   display: inline-block !important;
 }
+.nav-search-error {
+  margin-left: 5rem;
+}
 
 /* Index */
 .index-log-box {
@@ -293,7 +296,7 @@ main {
 /*******************************************/
 
 
-@media (min-width: 50rem) {
+@media (min-width: 48rem) {
 /******************************************
 /* BASE STYLES
 /*******************************************/
@@ -321,6 +324,10 @@ main {
  .nav-link.active {
   border-bottom: 2px solid var(--clr-font-secondary);
 }
+.search-form {
+  width: 100%;
+  padding-top: 0rem;
+}
 
 /******************************************
 /* LAYOUT
@@ -340,6 +347,9 @@ main {
 }
 .nav-user {
   gap: 7rem !important;
+}
+.nav-search-error {
+  margin-left: 3rem;
 }
 
 /* Index */

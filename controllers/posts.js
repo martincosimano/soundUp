@@ -3,7 +3,6 @@ const Comment = require("../models/Comment");
 const { getApiToken, searchTrack } = require("../services/spotify");
 const User = require("../models/User");
 const moment = require('moment');
-const nodemon = require("nodemon");
 
 
 // Post controller functions
