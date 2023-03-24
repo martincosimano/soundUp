@@ -3,7 +3,8 @@ const User = require("../models/User");
 module.exports = {
   getUserBySearch: async (req, res) => {
     try {
-      const { q } = req.query;
+      let { q } = req.query;
+      q = q.trim();
       const user = await User.findOne({ userName: q });
       if (user) {
         return res.redirect(`/profile/${user._id}`);
