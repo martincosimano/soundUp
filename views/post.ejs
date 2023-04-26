@@ -36,6 +36,9 @@
               <textarea class="form-control post-textarea" id="comment" name="comment" rows="3"></textarea>
             </div>
             <button type="submit" class="btn btn-new my-3">Submit</button>
+            <% if (flash.error) { %>
+              <div class="d-flex justify-content-center w-50 m-auto alert alert-danger"><%= flash.error %></div>
+            <% } %>
           </form>
           <hr>
           <div class="my-5">
@@ -60,6 +63,7 @@
                   </div>
                   <% } %>
                 </div>
+                
               </div>
             </div>
             <% } %>

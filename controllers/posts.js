@@ -89,7 +89,8 @@ getPost: async (req, res) => {
           user: req.user,
           comments: commentsWithTimeSince,
           currentUserID: req.user ? req.user._id : null,
-          timeSincePost: timeSincePost
+          timeSincePost: timeSincePost,
+          flash: req.flash() 
       });
   } catch (err) {
       console.log(err);

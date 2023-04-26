@@ -67,6 +67,8 @@ exports.getSignup = (req, res) => {
 
 exports.postSignup = (req, res, next) => {
   const validationErrors = [];
+  if (validator.isEmpty(req.body.userName))
+    validationErrors.push({ msg: "Name cannot be blank." });
   if (!validator.isEmail(req.body.email))
     validationErrors.push({ msg: "Please enter a valid email address." });
   if (!validator.isLength(req.body.password, { min: 8 }))
