@@ -5,13 +5,13 @@
     <div class="row justify-content-center align-center post-container text-center">
       <div class="col-lg-6 col-md-9 col-sm-10 px-4 mb-3 content-container">
         <div class="card mb-3">
-          <p class="mt-3"><%= post.caption %></p>
+          <h3 class="mt-3"><%= post.caption %></h3>
           <hr class="my-4">
           <div class="d-flex justify-content-center post-iframe-container">
             <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="70%" height="240" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
           </div>
           <hr class="my-4">
-          <p class="mb-0"><%= post.likes %> likes</p>
+          <p><%= post.likes %> likes</p>
           <div class="d-flex justify-content-center gap-5 mb-3">
             <% if(!post.likedBy.includes(user._id)){ %>
             <form action="/post/likePost/<%= post.id %>?_method=PUT" method="POST">
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="card mt-5">
-          <h4 class="my-3">Add a comment</h4>
+          <h5 class="my-3">Add a comment</h5>
           <form action="/comment/createComment/<%=post._id%>" method="POST">
             <div class="d-flex justify-content-center">
               <textarea class="form-control post-textarea" id="comment" name="comment" rows="3"></textarea>
@@ -54,7 +54,7 @@
                 </div>
                 <hr>
                 <div class="d-flex justify-content-end gap-3">
-                  <p><%= comments[i].timeSinceComment %></p>
+                  <p class="small"><%= comments[i].timeSinceComment %></p>
                     <% if (comments[i].user == user.id) { %>
                   <div>
                     <form action="/comment/deleteComment/<%= comments[i]._id %>?_method=DELETE" method="POST">
@@ -74,8 +74,8 @@
         <div class="card">
           <div class="card-body">
               <h5 class="card-title">Created by</h5>
-              <p class="card-text username"><%= post.userName %></p>
-              <p><%= timeSincePost %></p>
+              <p class="card-text username mt-3"><%= post.userName %></p>
+              <p class="small"><%= timeSincePost %></p>
               <a href="/profile/<%=post.user%>" class="btn btn-new">Go to User Profile</a>
           </div>
         </div>
