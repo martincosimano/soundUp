@@ -155,11 +155,7 @@ getPost: async (req, res) => {
         res.redirect(`/profile/${req.user._id}`);
     } catch (err) {
         console.log(err);
-
-        // Set a flash message to display the error on the profile page
         req.flash('error', err.message);
-
-        // Redirect to the profile page
         res.redirect(`/profile/${req.user._id}`);
     }
 },

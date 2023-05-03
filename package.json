@@ -7,7 +7,7 @@
     "start": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Martín Cosimano",
   "license": "MIT",
   "dependencies": {
     "aspell": "^0.1.0",

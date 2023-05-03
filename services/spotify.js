@@ -1,4 +1,3 @@
-//Using Spotify Api
 require('dotenv').config({ path: './config/.env' });
 const axios = require('axios');
 
