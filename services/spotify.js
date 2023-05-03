@@ -24,16 +24,20 @@ const getApiToken = async () => {
 
 const searchTrack = async (songName, artistName, token) => {
     const response = await axios.get('https://api.spotify.com/v1/search', {
-        headers: {
-            Authorization: 'Bearer ' + token,
-        },
-        params: {
-            q: `${songName} ${artistName}`,
-            type: 'track',
-            limit: 1,
-        },
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+      params: {
+        q: `${songName} ${artistName}`,
+        type: 'track',
+        limit: 5,
+      },
     });
+  
+    // Sort the search results by popularity in descending order
+    const sortedTracks = response.data.tracks.items.sort((a, b) => b.popularity - a.popularity);
+    
     return response.data;
-}
+  }
 
 module.exports = { getApiToken, searchTrack };
