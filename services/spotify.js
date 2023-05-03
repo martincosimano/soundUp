@@ -33,11 +33,10 @@ const searchTrack = async (songName, artistName, token) => {
         limit: 5,
       },
     });
-  
     // Sort the search results by popularity in descending order
     const sortedTracks = response.data.tracks.items.sort((a, b) => b.popularity - a.popularity);
-    
+
     return response.data;
-  }
+}
 
 module.exports = { getApiToken, searchTrack };
