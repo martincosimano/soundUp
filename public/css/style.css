@@ -47,12 +47,11 @@ a {
   text-decoration: none;
 }
 a:hover {
-  /* color: var(--clr-font-secondary); */
   opacity: 0.9;
 }
 .card {
   border-radius: 0;
-  background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(10,10,10,1) 100%);
+  background: linear-gradient(to right, #080808 0%, #0b0b0b 70%);
   box-shadow: 0px 0px 0px 1px var(--clr-background-tertiary);
 }
 input,
@@ -68,13 +67,13 @@ textarea:focus {
 }
 .card-header {
   border-bottom: none;
-  background: linear-gradient(90deg, rgba(5,5,5,1) 0%, rgba(10,10,10,1) 100%);
+  background: linear-gradient(to right, #080808 0%, #0b0b0b 70%);
 }
 nav {
   background-color: black !important;
 }
 .btn-outline-success {
-  border-color: var(--clr-font-secondary) !important;
+  border: 2px solid var(--clr-font-secondary) !important;
   color: var(--clr-font-secondary) !important;
 }
 .btn-outline-success:hover {
@@ -83,6 +82,9 @@ nav {
   color: var(--clr-font-plight) !important;
 }
 .nav-link {
+  font-family: var(--ff-tertiary);
+  text-transform: uppercase;
+  font-weight: 700;
   color: var(--clr-font-plight) !important;
 }
 
@@ -162,8 +164,9 @@ h3 {
   color: var(--clr-font-plight);
 }
 .pagination li a{
-  background-color: #212529 !important;
+  background-color: #0b0b0b !important;
   border: none !important;
+  color: var(--clr-font-plight);
 }
 /******************************************
 /* LAYOUT
@@ -232,6 +235,7 @@ main {
   font-family: var(--ff-primary);
   box-shadow: 6px 6px 0 black;
   border-radius: 0;
+  text-shadow: 1px 1px 2px black;
 }
 .btn-new:hover {
   background-color: var(--clr-font-secondary);
@@ -246,6 +250,7 @@ main {
   letter-spacing: 0.08rem;
   font-family: var(--ff-tertiary);
   border-radius: 0;
+  text-shadow: 1px 1px 2px black;
 }
 .index-register {
   color: var(--clr-font-plight);
@@ -271,9 +276,9 @@ main {
   100%{color: white;}
 }
 @keyframes animation-bg{
-  0%{background-color: white; color: black;}
-  50%{background-color: #634aaf; color:white;}
-  100%{background-color: white; color: black;}
+  0%{background-color: white; color: black; text-shadow: 1px 1px 2px white;}
+  50%{background-color: #634aaf; color:white; text-shadow: 1px 1px 2px black;}
+  100%{background-color: white; color: black; text-shadow: 1px 1px 2px white;}
 }
 
 /* Login & Register */
