@@ -3,23 +3,26 @@
 
 <div class="container-general">
   <main>
-    <div class="row justify-content-center align-center">
-      <div class="col-lg-6 col-md-9 col-sm-10 px-4 content-container">
+    <div class="row justify-content-center align-items-center h-100">
+      <div class="col-lg-6 col-md-9 col-sm-10 px-4 content-container h-100 mt-5">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title text-center mb-3">Log In</h3>
+            <h3 class="card-title text-center mb-3">Welcome back</h3>
+            <hr>
           </div>
           <div class="card-body">
             <form action="/login" method="POST">
               <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" aria-describedby="emailHelp" name="email">
+                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="example@email.com" aria-describedby="emailHelp" name="email">
               </div>
               <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="password" name="password">
               </div>
-              <button type="submit" class="btn w-100 mt-4 mb-2 login-log-in btn-new">Log In</button>
+              <div class="d-flex justify-content-center">
+                <button type="submit" class="btn mt-4 mb-2 login-register btn-new">Sign In</button>
+              </div>
             </form>
             <hr>
             <p class="card-text text-center">Don't have an account? <a href="/signup">Register</a></p>
