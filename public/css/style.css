@@ -51,7 +51,7 @@ a:hover {
 }
 .card {
   border-radius: 0;
-  background: linear-gradient(to right, #080808 0%, #0b0b0b 70%);
+  background: linear-gradient(to right, #111111 0%, #121212 70%);
   box-shadow: 0px 0px 0px 1px var(--clr-background-tertiary);
 }
 input,
@@ -67,7 +67,7 @@ textarea:focus {
 }
 .card-header {
   border-bottom: none;
-  background: linear-gradient(to right, #080808 0%, #0b0b0b 70%);
+  background: linear-gradient(to right, #111111 0%, #121212 70%);
 }
 nav {
   background-color: black !important;
@@ -195,6 +195,12 @@ main {
 }
 .nav-search-error {
   margin-left: 5rem;
+}
+.container-general.container-navbar {
+  min-height: 0;
+}
+.search-bar-container {
+  width: 100%;
 }
 
 /* Index */
@@ -362,6 +368,14 @@ main {
 }
 .nav-search-error {
   margin-left: 3rem;
+}
+.search-bar-container {
+  width: 53%;
+}
+.home-ul li a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
 }
 
 /* Index */
