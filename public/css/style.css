@@ -360,14 +360,11 @@ main {
 .navbar-brand {
   display: none;
 }
-.navbar-home-ul {
-  margin-top: 0rem !important;
-}
-.nav-user {
-  gap: 7rem !important;
+.home-ul {
+  margin-left: 6rem !important;
 }
 .nav-search-error {
-  margin-left: 3rem;
+  margin-left: 5.3rem;
 }
 .search-bar-container {
   width: 53%;
