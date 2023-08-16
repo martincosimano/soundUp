@@ -13,7 +13,7 @@ module.exports = {
       if (user) {
         return res.redirect(`/profile/${user._id}`);
       } else {
-        req.flash("error", `User '${q}' not found.`);
+        req.flash("error", `User '${q}' not found`);
         return res.redirect("/feed");
       }
     } catch (err) {

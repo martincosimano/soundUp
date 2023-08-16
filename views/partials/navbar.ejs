@@ -2,7 +2,7 @@
   <div class="container-general container-navbar">
     <nav class="navbar navbar-expand-md navbar-dark w-100 px-2">
       <a class="navbar-brand" href="/feed">
-        <img class="navbar-logo" src="/imgs/navbar.png">
+        <img class="navbar-logo" src="/imgs/navbar1.png">
       </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,19 +12,19 @@
           <form class="d-flex search-form col-md-3 col-sm-7 col-9" action="/search" method="GET">
             <div class="input-group">
               <input class="form-control" type="search" name="q" placeholder="<%= messages.error ? messages.error : 'Search for users' %>" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+              <button class="btn btn-outline-success btn-search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
           </form>
         </div>
-        <ul class="navbar-nav w-100 d-flex justify-content-around home-ul">
+        <ul class="navbar-nav w-100 d-flex justify-content-around nav-ul">
           <li class="nav-item">
-            <a class="nav-link text-center <%= activePage === 'home' ? 'active' : '' %>" href="/feed"><i class="fa-solid fa-house"></i> Home</a>
+            <a class="nav-link text-center nav-link-effect <%= activePage === 'home' ? 'active' : '' %>" href="/feed"><i class="fa-solid fa-house"></i> Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-center <%= activePage === 'profile' ? 'active' : '' %>" href="/profile/<%=currentUserID%>"><i class="fa-regular fa-user"></i> Profile</a>
+            <a class="nav-link text-center nav-link-effect <%= activePage === 'profile' ? 'active' : '' %>" href="/profile/<%=currentUserID%>"><i class="fa-regular fa-user"></i> Profile</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-center" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
+            <a class="nav-link text-center nav-link-effect" href="/logout"><i class="fa-solid fa-right-from-bracket"></i> Logout</a>
           </li>
         </ul>
       </div>

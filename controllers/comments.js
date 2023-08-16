@@ -14,7 +14,7 @@ module.exports = {
     createComment: async (req, res) => {
       try {
         if (!req.body.comment) {
-          throw new Error('Comment cannot be empty');
+          throw new Error('Comment cannot be empty.');
         }
         const comment = await Comment.create({
           comment: req.body.comment,
@@ -25,7 +25,6 @@ module.exports = {
           createdAt: moment().format('YYYY-MM-DD HH:mm:ss'),
           status: true
         });
-        console.log('Comment has been added!');
         res.redirect('/post/' + req.params.id);
       } catch (err) {
         console.log(err);
@@ -38,7 +37,6 @@ module.exports = {
         let comment = await Comment.findById({ _id: req.params.id });
         comment.status = false;
         await comment.save();
-        console.log("Deleted Comment");
         res.redirect("/post/" + comment.post);
       } catch (err) {
           res.redirect("/profile");

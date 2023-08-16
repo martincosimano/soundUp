@@ -1,42 +1,39 @@
 <%- include('partials/header') -%>
 <%- include('partials/navbar', { activePage: 'profile' }) %>
 <div class="container-general">
-  <main>
-    <div class="row justify-content-center align-center profile-container">
+  <main class="mt-3">
+    <div class="row justify-content-center align-center">
       <div class="col-lg-6 col-md-9 col-sm-10 px-4 mb-3 content-container">
         <div class="card">
           <div class="card-header">
-            <h3 class="card-title text-center mb-3">Profile</h3>
+            <h1 class="h1-profile card-title text-center mb-1">Profile</h1>
           </div>
           <div class="card-body text-center">
-            <p class="username"><strong>Name</strong>: <span class="profile-p-span"><%= user.userName %></span></p>
-            <p><strong>Email</strong>: <span class="profile-p-span"><%= user.email %></span></p>
-            <% if (isCurrentUser) { %>
-              <button type="submit" class="btn w-50 mt-4 mb-2 btn-new"><a href="/logout" class="profile-log-out">Log Out</a></button>
-            <% } %>
+            <p class="profile-p">Name: <span class="profile-p__username"><%= user.userName %></span></p>
+            <p class="profile-p">Email: <span class="profile-p__email"><%= user.email %></span></p>
           </div>
         </div>
         <% if (isCurrentUser) { %>
           <div class="card mt-5">
             <div class="card-header">
-              <h3 class="card-title text-center mb-3">Create a Post</h3>
+              <h2 class="h2-profile card-title text-center mb-1">Create a Post</h2>
             </div>
             <div class="card-body">
               <form action="/post/createPost" enctype="multipart/form-data" method="POST">
                 <div class="mb-3">
                   <label for="caption" class="form-label">Caption</label>
-                  <textarea class="form-control" id="caption" placeholder="Write something" name="caption"></textarea>
+                  <textarea class="form-control" id="caption" placeholder="write something" name="caption"></textarea>
                 </div>
                 <div class="mb-3">
-                  <label for="artistName" class="form-label">Artist Name</label>
-                  <input type="search" id="artistName" placeholder="Artist Name" name="artistName" class="form-control">
+                  <label for="artistName" class="form-label">Artist</label>
+                  <input type="search" id="artistName" placeholder="artist name" name="artistName" class="form-control">
                 </div>
                 <div class="mb-3">
-                  <label for="songName" class="form-label">Song Name</label>
-                  <input type="search" id="songName" placeholder="Song Name" name="songName" class="form-control">
+                  <label for="songName" class="form-label">Song</label>
+                  <input type="search" id="songName" placeholder="song name" name="songName" class="form-control">
                 </div>
                 <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn w-50 mt-4 mb-2 btn-new" value="Upload">Create</button>
+                  <button type="submit" class="btn mt-4 mb-2 btn-new" value="Upload">Create</button>
                 </div>
               </form>
               <% if (flash.error) { %>
@@ -50,25 +47,23 @@
       <div class="col-lg-6 col-md-9 col-sm-10 px-4 mb-5 content-container">
         <div class="card mb-4 text-center">
           <div class="card-header">
-            <h4 class="card-title">Recent Posts</h4>
+            <h2 class="h2-profile card-title">Recent Posts</h2>
           </div>
           <div class="card-body">
             <ul class="list-unstyled">
               <% posts.forEach(function(post, index) { %>
-                <li class="mb-4">
+                <li class="mb-3">
                   <% if(post.spotifyTrackId) { %>
-                    <div class="iframe-container px-3 py-4">
+                    <div class="iframe-container-profile pt-3">
                       <iframe src="https://open.spotify.com/embed/track/<%= post.spotifyTrackId %>" width="90%" height="250" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
-                      <div class="d-flex justify-content-center">
-                        <button class="btn btn-new">
-                            <a class="post-visit" href="/post/<%= post._id %>">View Post</a>
-                        </button>
+                      <div class="d-flex justify-content-center mx-3 mt-3 mb-3">
+                        <a class="btn-new" href="/post/<%= post._id %>">View Post</a>
                       </div>
                     </div>                   
                   <% } %>
                 </li>
                 <% if(index === 2) { %>
-                    <a class="btn w-50 btn-new" href="/profile/<%=user._id%>/userfeed">See More Posts</a>
+                    <a class="btn w-100 btn-new mt-3" href="/profile/<%=user._id%>/userfeed">See More Posts</a>
                 <% } %>
               <% }); %>
             </ul>

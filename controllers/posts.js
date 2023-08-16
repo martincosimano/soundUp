@@ -125,18 +125,18 @@ getPost: async (req, res) => {
 
         // Check if the required fields are filled in
         if(!caption) {
-          throw new Error('Caption is required')
+          throw new Error('Caption is required.')
         }else if(!songName) {
-          throw new Error('Song name is required')
+          throw new Error('Song name is required.')
         }else if(!artistName){
-          throw new Error('Artist name is required')
+          throw new Error('Artist name is required.')
         }
 
         const token = await getApiToken();
         const trackData = await searchTrack(songName, artistName, token);
 
         if (!trackData?.tracks?.items?.length) {
-            throw new Error('No track data found for this song and artist');
+            throw new Error('No track data found for this song and artist.');
         }
 
         const post = await Post.create({
