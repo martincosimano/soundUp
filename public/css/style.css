@@ -50,9 +50,6 @@ html {
 body {
   background-color: var(--color-black-secondary);
 }
-.appleLinks a { 
-    text-decoration: none !important; 
-}
 a {
     text-decoration: none;
 }
@@ -135,6 +132,7 @@ header {
     text-transform: capitalize; 
 }
 .profile-p__email {
+    text-decoration: none;
     text-transform: lowercase; 
 }
 .h1-profile {
@@ -157,8 +155,8 @@ header {
     font-size: var(--fs-300);
     text-transform: capitalize;
 }
-.username-post {
-    width: auto;
+.username-comments {
+    margin-right: auto;
 }
 .username-feed:hover,
 .username-post:hover {
@@ -177,6 +175,7 @@ header {
     font-size: var(--fs-200);
     word-break: break-word;
     text-align: initial;
+    margin-right: auto;
     padding-right: 0;
     margin-bottom: 0;
 }
