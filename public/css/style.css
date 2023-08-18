@@ -408,7 +408,7 @@ textarea:focus {
 /* MEDIA QUERY
 /*******************************************/
 
-@media (min-width: 48rem) {
+@media (min-width: 768px) {
     .container-general {
         width: min(90%, 70.5rem);
     }
