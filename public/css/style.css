@@ -347,6 +347,7 @@ textarea:focus {
   text-transform: uppercase;
   border-radius: 0;
   text-shadow: 1px 1px 2px black;
+  min-width: 10.5rem;
 }
 .log-box__main-login:focus,
 .log-box__main-register:focus,
@@ -475,8 +476,8 @@ textarea:focus {
     }
     .log-box__main-login,
     .log-box__main-register {
-      padding-inline: 2rem;
-      padding-block: 0.5rem;
-      font-size: var(--fs-300);
+        padding-inline: 2rem;
+        padding-block: 0.5rem;
+        font-size: var(--fs-300);
     }
 }
