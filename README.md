@@ -6,7 +6,8 @@ Using HTML, EJS, CSS, Javascript, Node, Express, MongoDB, and Mongoose, Sound UP
 
 Whether you're a music lover looking to share your latest discovery or someone who wants to discover new songs, Sound UP is the perfect app for you. With its simple yet powerful features, it makes sharing and discovering music more fun and exciting than ever before.
 
-![image](https://user-images.githubusercontent.com/103332504/225462588-360bf3cd-1e37-4f9e-a033-e64ab08ee33b.png)
+![image](https://github.com/martincosimano/soundUp/assets/103332504/88bc0cd2-30c0-43bb-8924-21215797e4df)
+
 
 
 
